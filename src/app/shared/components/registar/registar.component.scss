@@ -1,0 +1,19 @@
+.header {
+  background-color: #c29125;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Ajuste o padding conforme necessário */
+  text-transform: uppercase;
+}
+
+.header img {
+  max-height: 50px; /* Ajuste a altura da imagem conforme necessário */
+}
+.tipo_user{
+  display: flex;
+  justify-content: center;
+}
+
+

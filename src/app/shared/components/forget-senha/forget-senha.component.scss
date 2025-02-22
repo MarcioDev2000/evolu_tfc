@@ -1,0 +1,34 @@
+.header {
+  background-color: #c29125;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px; /* Ajuste o padding conforme necessário */
+  text-transform: uppercase;
+}
+
+.header img {
+  max-height: 50px; /* Ajuste a altura da imagem conforme necessário */
+}
+
+.content {
+  width: 98%; /* Alterei para 100% para ocupar toda a largura da tela */
+  height: 100%;
+}
+
+.card {
+  width: 100%;
+  /* Removi as margens fixas e adicionei padding para espaçamento interno */
+  padding: 20px;
+  margin-top: 20px;
+}
+.card-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+a{
+  color: white;
+}

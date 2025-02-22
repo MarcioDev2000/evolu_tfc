@@ -1,0 +1,16 @@
+<div class="logo d-flex justify-content-center">
+  <a href="#" class="simple-text logo-mini">
+    <img src="../../../../assets/img/Duty - Logo final-06.png" alt="" />
+  </a>
+</div>
+
+<div class="sidebar-wrapper">
+  <ul class="nav">
+    <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{ menuItem.class }} nav-item">
+      <a [routerLink]="[menuItem.rota]">
+        <i class="tim-icons  {{ menuItem.icon }}"></i>
+        <p>{{ menuItem.nome }}</p>
+      </a>
+    </li>
+  </ul>
+</div>

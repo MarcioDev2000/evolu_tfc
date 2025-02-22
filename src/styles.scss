@@ -1,0 +1,257 @@
+/* You can add global styles to this file, and also import other style files */
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.flex-direction-column {
+    flex-direction: column;
+}
+
+html {
+    height: 100%;
+}
+
+.height-100 {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+.mt-10 {
+    margin-top: 12rem !important;
+}
+
+option {
+    background-color: #1e1e2f;
+    color: #fff;
+}
+
+.date-input {
+    background-color: #1e1e2f;
+    color: white;
+    /* Para garantir que o texto seja visível na nova cor de fundo */
+}
+
+.page-header .page-header-image {
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.page-header .content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 880px;
+}
+
+.presentation-page .front,
+.presentation-page .front:after,
+.presentation-page .front .btn,
+.logo-container .logo,
+.logo-container .brand {
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.logo-container .brand {
+    font-size: 16px;
+    color: #FFFFFF;
+    line-height: 18px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 7px;
+    width: 70px;
+    height: 40px;
+    text-align: left;
+}
+
+.logo-container .brand-material {
+    font-size: 18px;
+    margin-top: 15px;
+    height: 25px;
+    width: auto;
+}
+
+.presentation-page .n-logo,
+.index-page .n-logo {
+    max-width: 100px;
+    margin-bottom: 40px;
+}
+
+.presentation-page .n-logo,
+.index-page .n-logo {
+    max-width: 100px;
+    margin-bottom: 40px;
+}
+
+.invision-logo {
+    max-width: 70px;
+    top: -2px;
+    position: relative;
+}
+
+.wrapper[filter-color=orange] {
+    background: rgba(44, 44, 44, .2);
+    background: linear-gradient(0deg, rgba(44, 44, 44, .2), rgba(224, 23, 3, .6));
+}
+
+.footer ul {
+    text-align: left;
+}
+
+.btn.btn-icon:not(.btn-footer) i.now-ui-icons,
+.btn.btn-icon:not(.btn-footer) i.fa,
+.navbar .navbar-nav>a.btn.btn-icon:not(.btn-footer) i.now-ui-icons,
+.navbar .navbar-nav>a.btn.btn-icon:not(.btn-footer) i.fa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-12px, -12px);
+    line-height: 1.5626rem;
+    width: 25px;
+}
+
+.description,
+.card-description,
+.footer-big p {
+    color: #9A9A9A;
+    font-weight: 300;
+}
+
+.media .media-footer .btn {
+    margin-bottom: 20px;
+}
+
+.media .media-footer:after {
+    display: table;
+    content: " ";
+    clear: both;
+}
+
+.media .media-footer:after {
+    display: table;
+    content: " ";
+    clear: both;
+}
+
+.footer nav {
+    display: inline-block;
+    float: left;
+}
+
+.footer ul {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.btn.btn-icon,
+.navbar .navbar-nav>a.btn.btn-icon {
+    height: 2.375rem;
+    min-width: 2.375rem;
+    width: 2.375rem;
+    padding: 0;
+    font-size: .9375rem;
+    overflow: hidden;
+    position: relative;
+    line-height: normal;
+}
+
+.sharing-area .btn {
+    margin: 15px 4px 0 !important;
+}
+
+.btn.btn-icon.btn-lg {
+    height: 3.6rem;
+    min-width: 3.6rem;
+    width: 3.6rem;
+    font-size: 25px !important;
+    padding: 15px !important;
+}
+
+.btn-twitter {
+    color: #55acee !important;
+}
+
+.btn-facebook {
+    color: #3b5998 !important;
+}
+
+.btn-linkedin {
+    color: #0077b5 !important;
+}
+
+.btn-github {
+    color: #333 !important;
+}
+
+.navbar-brand {
+    margin-top: -15px !important;
+    color: rgb(15, 15, 15) !important;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+nav.navbar.navbar-expand-lg.bg-orange.fixed-top.navbar-transparent {
+    background-color: #f96332 !important;
+}
+
+ngb-modal-backdrop.modal-backdrop.fade.show {
+    z-index: 0 !important;
+}
+
+.ngx-pagination a span,
+.ngx-pagination li span {
+    color: #ffffff; /* Cor branca para os spans dentro de links e listas de paginação */
+}
+
+.ngx-pagination a:hover{
+  background-color: #c2902500 !important;
+}
+
+.pagination-previous a,
+.pagination-next a {
+    color: #ffffff !important; /* Cor do texto do botão */
+}
+
+
+/* Para os botões "Previous" e "Next" ao passar o mouse */
+.pagination-previous a:hover,
+.pagination-next a:hover {
+    background-color: #c2902500 !important; /* Cor de fundo ao passar o mouse */
+    color: #ffffff; /* Cor do texto ao passar o mouse */
+}
+
+/* Estilo para a página atual */
+.ngx-pagination .current {
+  padding: .1875rem .625rem;
+  background: #2199e8;
+  color: #fefefe;
+  cursor: default; /* Indicando que não é clicável */
+}
+
+
+

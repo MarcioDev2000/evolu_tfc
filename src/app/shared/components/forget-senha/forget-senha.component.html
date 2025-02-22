@@ -1,0 +1,52 @@
+<header class="header">
+  <div>
+    <a href="#">
+      <img src="../../../../assets/img/Duty - Logo final-03.png" alt="">
+    </a>
+  </div>
+
+  <nav>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/registar">Registrar</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="content text-center">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <img src="../../../../assets/img/Duty - Logo final-05.png" width="80" height="100" alt="Logo" />
+        </div>
+        <form [formGroup]="recuperarSenhaForm" (ngSubmit)="recuperarSenha()">
+          <div class="card-body">
+            <div class="form-group">
+              <input
+                formControlName="email"
+                class="form-control"
+                placeholder="Email de usuário"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                type="email"
+                name="email"
+                aria-describedby="emailHelp"
+                required
+              />
+              <div *ngIf="recuperarSenhaForm.controls['email'].errors?.['pattern']" class="text-danger">Digite um e-mail
+                válido.</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row card-button">
+              <button type="submit" class="btn btn-fill btn-danger mr-2">Recuperar Senha</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

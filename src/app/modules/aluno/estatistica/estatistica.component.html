@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="row">
+      <div class="col-lg-4">
+          <div class="card card-chart chart">
+              <div class="card-header">
+                  <h5 class="card-category">Pré-Projeto </h5>
+                  <h3 class="card-title">
+                      <i class="tim-icons icon-paper text-danger"></i> Total : {{ totalFaturas | number }}
+                  </h3>
+              </div>
+              <div class="card-body">
+                  <div class="chart-area">
+                      <canvas id="chartLineRed"></canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="card card-chart chart">
+              <div class="card-header">
+                  <h5 class="card-category">Monografia</h5>
+                  <h3 class="card-title">
+                      <i class="tim-icons icon-delivery-fast text-info"></i> Total : {{ totalFornecedor | number }}
+                  </h3>
+              </div>
+              <div class="card-body">
+                  <div class="chart-area">
+                      <canvas id="CountryChart"></canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="card card-chart chart">
+              <div class="card-header">
+                  <h5 class="card-category">Orientador </h5>
+                  <h3 class="card-title">
+                      <i class="tim-icons icon-check-2 text-success"></i>Total: {{ totalPropostaAceites | number }}
+                  </h3>
+              </div>
+              <div class="card-body">
+                  <div class="chart-area"><canvas id="chartLineGreen"></canvas></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12" *ngIf="totalFaturas > 0">
+          <div class="card card-chart">
+              <div class="card-header">
+                  <div class="row">
+                      <div class="col-sm-6 text-left">
+                          <h5 class="card-category">Total de Faturas</h5>
+                          <h2 class="card-title">Desempenho Mensal</h2>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="chart-area">
+                      <canvas id="chartBig1"></canvas>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-12 fatura" *ngIf="totalFaturas === 0">
+          <p>Nenhum dado disponível</p>
+      </div>
+  </div>
+</div>
