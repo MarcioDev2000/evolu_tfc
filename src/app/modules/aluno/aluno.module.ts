@@ -13,10 +13,14 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AddMonografiaComponent } from './add-monografia/add-monografia.component';
+import { VerMonografiaComponent } from './ver-monografia/ver-monografia.component';
 
 @NgModule({
   declarations: [
-    EstatisticaComponent
+    EstatisticaComponent,
+    AddMonografiaComponent,
+    VerMonografiaComponent
   ],
   imports: [
     CommonModule,

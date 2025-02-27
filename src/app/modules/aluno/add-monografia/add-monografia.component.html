@@ -1,0 +1,193 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="title">Inscrição da Monografia</h3>
+        </div>
+        <div class="card-body">
+          <!-- Formulário reativo com (ngSubmit) e formGroup -->
+          <form (ngSubmit)="onSubmit()" [formGroup]="monografiaForm">
+            <div class="row">
+              <!-- Campo: Tema da Monografia -->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Tema da Monografia</label>
+                  <input
+                    formControlName="tema"
+                    class="form-control"
+                    placeholder="Digite o tema da monografia"
+                    type="text"
+                  />
+                  <div
+                    *ngIf="monografiaForm.get('tema')?.invalid && monografiaForm.get('tema')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O tema é obrigatório e deve ter no máximo 200 caracteres.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Campo: Especialidade -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Especialidade</label>
+                  <select
+                    class="form-control"
+                    formControlName="especialidadeId"
+                    (change)="onEspecialidadeSelecionada($event)"
+                    required
+                  >
+                    <option value="" disabled selected>Selecione uma especialidade</option>
+                    <option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
+                      {{ especialidade.nome }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="monografiaForm.get('especialidadeId')?.invalid && monografiaForm.get('especialidadeId')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    A especialidade é obrigatória.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campo: Orientador -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Orientador</label>
+                  <select class="form-control" formControlName="orientadorId" required>
+                    <option value="" disabled selected>Selecione um orientador</option>
+                    <option *ngFor="let orientador of orientadores" [value]="orientador.id">
+                      {{ orientador.nomeCompleto }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="monografiaForm.get('orientadorId')?.invalid && monografiaForm.get('orientadorId')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O orientador é obrigatório.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="formFileSm" class="form-label">Extrato Bancário</label>
+                  <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="onFileChange($event, 'extratoBancario')"
+                  accept=".pdf, .jpeg, .png" >
+                  <div
+                    *ngIf="monografiaForm.get('extratoBancario')?.invalid && monografiaForm.get('extratoBancario')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O extrato bancário é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Campo: Declaração de Notas -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Declaração de Notas</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="onFileChange($event, 'declaracaoNotas')"
+                    accept=".pdf, .jpeg, .png"
+                  />
+                  <div
+                    *ngIf="monografiaForm.get('declaracaoNotas')?.invalid && monografiaForm.get('declaracaoNotas')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    A declaração de notas é obrigatória e deve ser um arquivo PDF, JPEG ou PNG.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Campo: Termo de Orientador -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Termo de Orientador</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="onFileChange($event, 'termoOrientador')"
+                    accept=".pdf, .jpeg, .png"
+                  />
+                  <div
+                    *ngIf="monografiaForm.get('termoOrientador')?.invalid && monografiaForm.get('termoOrientador')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O termo de orientador é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campo: Projeto -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Projeto</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="onFileChange($event, 'projeto')"
+                    accept=".pdf, .doc, .docx"
+                  />
+                  <div
+                    *ngIf="monografiaForm.get('projeto')?.invalid && monografiaForm.get('projeto')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O projeto é obrigatório e deve ser um arquivo PDF, DOC ou DOCX.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Campo: Documento de Identificação -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Documento de Identificação (BI)</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="onFileChange($event, 'documentoBi')"
+                    accept=".pdf, .jpeg, .png"
+                  />
+                  <div
+                    *ngIf="monografiaForm.get('documentoBi')?.invalid && monografiaForm.get('documentoBi')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O documento de identificação é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botão de Submissão -->
+            <div class="card-footer text-center">
+              <button class="btn btn-fill btn-danger" type="submit" [disabled]="monografiaForm.invalid">
+                Salvar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

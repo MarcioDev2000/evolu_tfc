@@ -1,0 +1,93 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="title">Minha Monografia</h3>
+          <div class="col-md-4 pr-md-1">
+            <div class="form-group">
+              <input class="form-control" name="pesquisa" placeholder="Pesquisa..." [(ngModel)]="filtro" type="text"
+                (input)="applyFilter()">
+            </div>
+          </div>
+        </div>
+        <div class="card card-plain">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table tablesorter" id="">
+                <thead class="text-primary">
+                  <tr>
+                    <th>Tema</th>
+                    <th>Status</th>
+                    <th>Extrato Bancário</th>
+                    <th>Declaração de Notas</th>
+                    <th>Termo do Orientador</th>
+                    <th>Projeto</th>
+                    <th>Documento BI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="monografia">
+                    <td><span style="color: white;">{{ monografia.tema }}</span></td>
+                    <td>
+                      <span class="status" [ngClass]="{
+                        'badge badge-success': monografia.status === 'APROVADA',
+                        'badge badge-warning': monografia.status === 'PENDENTE',
+                        'badge badge-danger': monografia.status === 'REPROVADA'
+                      }">
+                        {{ monografia.status }}
+                      </span>
+                    </td>
+                    <td>
+                      <button class="btn btn-link" type="button" placement="left" ngbTooltip="Baixar Extrato Bancário"
+                      container="body" (click)="baixarDocumento(monografia.linkExtratoBancario)">
+                      <i class="fas fa-file-pdf" style="color: red;"></i>
+                      <span style="color: white;">Extrato Bancário</span>
+                      <i class="fas fa-download" style="color: #28a745;"></i>
+                    </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-link" type="button" placement="left" ngbTooltip="Baixar Declaração de Notas"
+                        container="body" (click)="baixarDocumento(monografia.linkDeclaracaoNotas)">
+                        <i class="fas fa-file-pdf" style="color: red;"></i>
+                        <span style="color: white;">Declaração de Notas</span>
+                        <i class="fas fa-download" style="color: #28a745;"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-link" type="button" placement="left" ngbTooltip="Baixar Termo do Orientador"
+                        container="body" (click)="baixarDocumento(monografia.linkTermoOrientador)">
+                        <i class="fas fa-file-pdf" style="color: red;"></i>
+                        <span style="color: white;">Termo do Orientador</span>
+                        <i class="fas fa-download" style="color: #28a745;"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-link" type="button" placement="left" ngbTooltip="Baixar Projeto"
+                        container="body" (click)="baixarDocumento(monografia.linkProjeto)">
+                        <i class="fas fa-file-pdf" style="color: red;"></i>
+                        <span style="color: white;">Projeto</span>
+                        <i class="fas fa-download" style="color: #28a745;"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-link" type="button" placement="left" ngbTooltip="Baixar Documento BI"
+                        container="body" (click)="baixarDocumento(monografia.linkDocumentoBi)">
+                        <i class="fas fa-file-pdf" style="color: red;"></i>
+                        <span style="color: white;">Documento BI</span>
+                        <i class="fas fa-download" style="color: #28a745;"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!monografia">
+                    <td colspan="7" class="text-center">Carregando monografia... </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
