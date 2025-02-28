@@ -22,7 +22,7 @@
                   <span class="status" [ngClass]="{
                     'badge badge-success': monografia.status === 'APROVADA',
                     'badge badge-warning': monografia.status === 'PENDENTE',
-                    'badge badge-danger': monografia.status === 'REPROVADA'
+                    'badge badge-danger': monografia.status === 'EM_REVISAO'
                   }">
                     {{ monografia.status }}
                   </span>
@@ -33,6 +33,10 @@
               </div>
               <div class="info-item">
                 <p><strong>Campo de Estudo:  </strong> <span>{{ monografia.especialidade }}</span></p>
+              </div>
+              <!-- Novo bloco para a descrição de melhoria -->
+              <div class="info-item descricao-melhoria">
+                <p><i class="fas fa-exclamation-circle"></i><strong>Descrição de Melhoria:  </strong> <span>{{ monografia.descricaoMelhoria }}</span></p>
               </div>
             </div>
 
