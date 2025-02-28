@@ -1,0 +1,57 @@
+<div class="content">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card profile-card">
+        <div class="card-header bg-primary text-white text-center">
+          <h3 class="title mb-0">Perfil do Usuário</h3>
+        </div>
+        <div class="card-body">
+          <div class="text-center photo">
+            <img src="../../../../assets/img/anime3.png" alt="Foto do perfil" class="profile-image">
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+              <div class="profile-details">
+                <div class="detail-item">
+                  <i class="fas fa-user icon"></i>
+                  <span class="label">Nome de usuário:</span>
+                  <span class="value">{{ usuario.nome }} {{ usuario.sobrenome }}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-phone icon"></i>
+                  <span class="label">Telefone:</span>
+                  <span class="value">{{ usuario.telefone }}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-envelope icon"></i>
+                  <span class="label">Email:</span>
+                  <span class="value">{{ usuario.email }}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-id-card icon"></i>
+                  <span class="label">Matrícula:</span>
+                  <span class="value">{{ usuario.matricula }}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-users icon"></i>
+                  <span class="label">Tipo de Usuário:</span>
+                  <span class="value">{{ usuario.tipoUsuario }}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-map-marker-alt icon"></i>
+                  <span class="label">Endereço:</span>
+                  <span class="value">{{ usuario.endereco }}</span>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-id-badge icon"></i>
+                  <span class="label">NIF:</span>
+                  <span class="value">{{ usuario.nif }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MonografiaService } from 'src/app/shared/services/monografia.service';
-import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
-// Interfaces para tipagem
 interface Especialidade {
   id: string;
   nome: string;
@@ -16,43 +15,45 @@ interface Orientador {
 }
 
 @Component({
-  selector: 'app-add-monografia',
-  templateUrl: './add-monografia.component.html',
-  styleUrls: ['./add-monografia.component.scss'],
+  selector: 'app-atualizar-monografia',
+  templateUrl: './atualizar-monografia.component.html',
+  styleUrls: ['./atualizar-monografia.component.scss']
 })
-export class AddMonografiaComponent implements OnInit {
+export class AtualizarMonografiaComponent implements OnInit {
   especialidades: Especialidade[] = [];
   orientadores: Orientador[] = [];
   monografiaForm!: FormGroup;
+  monografiaId!: string;
 
   constructor(
     private monografiaService: MonografiaService,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.monografiaId = this.route.snapshot.params['id'];
     this.inicializarFormulario();
     this.carregarEspecialidades();
     this.setAlunoId();
+    this.carregarDadosMonografia();
   }
 
-  // Inicializa o formulário reativo
   inicializarFormulario(): void {
     this.monografiaForm = this.formBuilder.group({
       tema: ['', [Validators.required, Validators.maxLength(200)]],
       especialidadeId: ['', Validators.required],
       orientadorId: ['', Validators.required],
-      extratoBancario: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
-      declaracaoNotas: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
-      termoOrientador: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
-      projeto: [null, [Validators.required, this.validateFileType(['pdf', 'doc', 'docx'])]],
-      documentoBi: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
+      extratoBancario: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
+      declaracaoNotas: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
+      termoOrientador: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
+      projeto: [null, this.validateFileType(['pdf', 'doc', 'docx'])],
+      documentoBi: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
       alunoId: [''],
     });
   }
 
-  // Valida o tipo de arquivo
   validateFileType(allowedTypes: string[]) {
     return (control: any) => {
       const file = control.value;
@@ -66,7 +67,22 @@ export class AddMonografiaComponent implements OnInit {
     };
   }
 
-  // Define o ID do aluno logado
+  carregarDadosMonografia(): void {
+    this.monografiaService.getMonografiaById(this.monografiaId).subscribe({
+      next: (monografia) => {
+        this.monografiaForm.patchValue({
+          tema: monografia.tema,
+          especialidadeId: monografia.especialidadeId,
+          orientadorId: monografia.orientadorId
+        });
+      },
+      error: (error) => {
+        console.error('Erro ao carregar monografia:', error);
+        Swal.fire('Erro', 'Não foi possível carregar os dados da monografia.', 'error');
+      }
+    });
+  }
+
   setAlunoId(): void {
     const userDataString = localStorage.getItem('user');
     if (userDataString) {
@@ -77,6 +93,7 @@ export class AddMonografiaComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
 
   // Carrega a lista de especialidades
   carregarEspecialidades(): void {
@@ -93,7 +110,7 @@ export class AddMonografiaComponent implements OnInit {
   carregarOrientadores(especialidadeId: string): void {
     this.monografiaService.getOrientadoresPorEspecialidade(especialidadeId).subscribe(
       (data: Orientador[]) => {
-        console.log('Orientadores carregados:', data); // 👈 Verificar se os orientadores estão sendo carregados
+        console.log('Orientadores carregados:', data); // Verifique se os dados estão corretos
         this.orientadores = data;
       },
       (error) => {
@@ -101,6 +118,7 @@ export class AddMonografiaComponent implements OnInit {
       }
     );
   }
+
 
 
   // Método chamado quando o usuário seleciona uma especialidade
@@ -111,7 +129,6 @@ export class AddMonografiaComponent implements OnInit {
     }
   }
 
-  // Método chamado quando um arquivo é selecionado
   onFileChange(event: any, campo: string): void {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -119,49 +136,32 @@ export class AddMonografiaComponent implements OnInit {
     }
   }
 
-  // Método chamado ao submeter o formulário
   onSubmit(): void {
     if (this.monografiaForm.invalid) {
       Swal.fire('Erro', 'Preencha todos os campos corretamente.', 'error');
       return;
     }
 
-    const orientadorId = this.monografiaForm.get('orientadorId')?.value;
-    if (!orientadorId) {
-      Swal.fire('Erro', 'Selecione um orientador.', 'error');
-      return;
-    }
-
     const formData = new FormData();
-    formData.append('tema', this.monografiaForm.get('tema')?.value);
-    formData.append('especialidadeId', this.monografiaForm.get('especialidadeId')?.value);
-    formData.append('orientadorId', orientadorId);
-    formData.append('extratoBancario', this.monografiaForm.get('extratoBancario')?.value);
-    formData.append('declaracaoNotas', this.monografiaForm.get('declaracaoNotas')?.value);
-    formData.append('termoOrientador', this.monografiaForm.get('termoOrientador')?.value);
-    formData.append('projeto', this.monografiaForm.get('projeto')?.value);
-    formData.append('documentoBi', this.monografiaForm.get('documentoBi')?.value);
-    formData.append('alunoId', this.monografiaForm.get('alunoId')?.value);
+    Object.keys(this.monografiaForm.controls).forEach((key) => {
+      const value = this.monografiaForm.get(key)?.value;
+      if (value) {
+        formData.append(key, value);
+      }
+    });
 
-    this.monografiaService.createMonografia(formData).subscribe(
+    this.monografiaService.updateMonografia(this.monografiaId, formData).subscribe(
       () => {
-        Swal.fire('Sucesso', 'Monografia criada com sucesso!', 'success').then(() => {
-          this.monografiaForm.reset();
+        Swal.fire('Sucesso', 'Monografia atualizada com sucesso!', 'success').then(() => {
           this.router.navigate(['/aluno/inscricao-monografia']);
         });
-      },(error) => {
-        if (error.status === 500 && error.error.message.includes("O aluno já possui uma monografia cadastrada")) {
-          Swal.fire('Aviso', 'Você já possui uma monografia cadastrada e não pode inscrever-se novamente.', 'warning');
-          this.monografiaForm.reset();
-          this.router.navigate(['/aluno/inscricao-monografia']);
-        } else {
-          this.handleError('Erro ao criar monografia:', error);
-        }
+      },
+      (error) => {
+        this.handleError('Erro ao atualizar monografia:', error);
       }
     );
   }
 
-  // Centraliza o tratamento de erros
   private handleError(message: string, error: any): void {
     console.error(message, error);
     Swal.fire('Erro', 'Ocorreu um erro. Tente novamente mais tarde.', 'error');

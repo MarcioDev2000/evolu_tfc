@@ -15,12 +15,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AddMonografiaComponent } from './add-monografia/add-monografia.component';
 import { VerMonografiaComponent } from './ver-monografia/ver-monografia.component';
+import { AtualizarMonografiaComponent } from './atualizar-monografia/atualizar-monografia.component';
+import { DetalheMonografiaComponent } from './detalhe-monografia/detalhe-monografia.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
     EstatisticaComponent,
     AddMonografiaComponent,
-    VerMonografiaComponent
+    VerMonografiaComponent,
+    AtualizarMonografiaComponent,
+    DetalheMonografiaComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,

@@ -169,5 +169,12 @@ export class UserService {
     );
   }
 
-
+  getUsuarioPorId(usuarioId: string): Observable<User> {
+    return this.http.get<User>(`${environment.API_URL}/usuarios/${usuarioId}/`).pipe(
+      catchError(error => {
+        console.error('Erro ao obter usuário:', error);
+        return throwError(error);
+      })
+    );
+  }
 }

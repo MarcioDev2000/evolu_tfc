@@ -37,17 +37,16 @@ export class MonografiaService {
 
   // Obtém a lista de orientadores por especialidade
   getOrientadoresPorEspecialidade(especialidadeId: string): Observable<any> {
-    return this.http
-      .get<any>(
-        `${environment.API_URL}/monografias/orientadores/${especialidadeId}`
-      )
-      .pipe(
-        catchError((error) => {
-          console.error('Erro ao buscar orientadores:', error);
-          return throwError(error);
-        })
-      );
+    return this.http.get<any>(`${environment.API_URL}/orientadores/especialidade/${especialidadeId}`).pipe(
+      tap(() => this.showMessage('Orientadores carregados com sucesso!')),
+      catchError((error) => {
+        console.error('Erro ao buscar orientadores:', error);
+        this.showMessage('Erro ao carregar orientadores.');
+        return throwError(error);
+      })
+    );
   }
+
 
   // Cria uma nova monografia
   createMonografia(formData: FormData): Observable<any> {
@@ -206,6 +205,17 @@ getMonografiaByAlunoId(alunoId: string): Observable<any> {
       })
     );
   }
+
+  
+getEstatisticasAluno(alunoId: string): Observable<any> {
+  return this.http.get<any>(`${environment.API_URL}/monografias/aluno/${alunoId}/estatisticas`).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar estatísticas do aluno:', error);
+      return throwError(error);
+    })
+  );
+}
+
 
   // Visualizar documento específico de uma monografia
 visualizarDocumento(id: string, tipoDocumento: string): Observable<Blob> {

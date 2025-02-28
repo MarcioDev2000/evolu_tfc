@@ -1,0 +1,21 @@
+.ver-fatura{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+.mb-3 input[type="file"] {
+  height: 40px;
+}
+/* Estilo para os radio buttons */
+.form-group label {
+  margin-right: 15px;
+}
+
+.form-group input[type="radio"] {
+  margin-right: 5px;
+}

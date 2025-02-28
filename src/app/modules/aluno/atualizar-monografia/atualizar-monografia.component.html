@@ -1,9 +1,9 @@
 <div class="content">
   <div class="row">
     <div class="col-md-12">
-      <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-          <h3 class="title">Inscrição da Monografia</h3>
+      <div class="card">
+        <div class="card-header  bg-primary text-white">
+          <h3 class="title">Atualização da Monografia</h3>
         </div>
         <div class="card-body">
           <!-- Formulário reativo com (ngSubmit) e formGroup -->
@@ -56,7 +56,7 @@
                 </div>
               </div>
 
-              <!-- Campo: Orientador -->
+
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Orientador</label>
@@ -78,21 +78,26 @@
             </div>
 
             <div class="row">
+              <!-- Campo: Extrato Bancário -->
               <div class="col-md-6">
                 <div class="mb-3">
                   <label for="formFileSm" class="form-label">Extrato Bancário</label>
-                  <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="onFileChange($event, 'extratoBancario')"
-                  accept=".pdf, .jpeg, .png" >
+                  <input
+                    class="form-control form-control-sm"
+                    id="formFileSm"
+                    type="file"
+                    (change)="onFileChange($event, 'extratoBancario')"
+                    accept=".pdf, .jpeg, .png"
+                  />
                   <div
                     *ngIf="monografiaForm.get('extratoBancario')?.invalid && monografiaForm.get('extratoBancario')?.touched"
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    O extrato bancário é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
+                    O extrato bancário deve ser um arquivo PDF, JPEG ou PNG.
                   </div>
                 </div>
               </div>
-
 
               <!-- Campo: Declaração de Notas -->
               <div class="col-md-6">
@@ -109,7 +114,7 @@
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    A declaração de notas é obrigatória e deve ser um arquivo PDF, JPEG ou PNG.
+                    A declaração de notas deve ser um arquivo PDF, JPEG ou PNG.
                   </div>
                 </div>
               </div>
@@ -131,7 +136,7 @@
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    O termo de orientador é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
+                    O termo de orientador deve ser um arquivo PDF, JPEG ou PNG.
                   </div>
                 </div>
               </div>
@@ -151,7 +156,7 @@
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    O projeto é obrigatório e deve ser um arquivo PDF, DOC ou DOCX.
+                    O projeto deve ser um arquivo PDF, DOC ou DOCX.
                   </div>
                 </div>
               </div>
@@ -173,7 +178,7 @@
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    O documento de identificação é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
+                    O documento de identificação deve ser um arquivo PDF, JPEG ou PNG.
                   </div>
                 </div>
               </div>
@@ -182,7 +187,7 @@
             <!-- Botão de Submissão -->
             <div class="card-footer text-center">
               <button class="btn btn-fill btn-danger" type="submit" [disabled]="monografiaForm.invalid">
-                Salvar
+                Atualizar
               </button>
             </div>
           </form>

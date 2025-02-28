@@ -1,6 +1,150 @@
+
+.card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0;
+  background-color: #007bff;
+  color: white;
+}
+
+.card-header h3 {
+  margin-bottom: 0;
+}
+
+.table-responsive {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
 .status {
   margin: 8px;
   border-radius: 12px;
   padding: 5px 10px;
   display: inline-block;
+  font-size: 14px;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+.badge-warning {
+  background-color: #c29125;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.btn-light:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-outline-info {
+  border-color: #17a2b8;
+  color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.fa-spinner {
+  margin-right: 8px;
+}
+
+@media (max-width: 1024px) {
+  .card-header h3 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .table {
+    font-size: 14px;
+  }
+
+  .status {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+/* Dispositivos móveis (até 767px) */
+@media (max-width: 767px) {
+  .card {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .card-header h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .table {
+    font-size: 12px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .status {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .btn-light {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .photo img {
+    width: 80px;
+    height: 80px;
+  }
 }

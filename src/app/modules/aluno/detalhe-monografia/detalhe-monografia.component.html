@@ -1,0 +1,93 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h3 class="title mb-0">Detalhe da Sua Monografia</h3>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-light btn-sm" [routerLink]="'/aluno/inscricao-monografia'">
+              <i class="fas fa-arrow-left"></i> Voltar para Monografias
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6" *ngIf="monografia">
+              <h3 class="mb-4"><strong>Informações da Monografia</strong></h3>
+              <div class="info-item">
+                <p><strong>Tema:  </strong> <span>{{ monografia.tema }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Status:</strong>
+                  <span class="status" [ngClass]="{
+                    'badge badge-success': monografia.status === 'APROVADA',
+                    'badge badge-warning': monografia.status === 'PENDENTE',
+                    'badge badge-danger': monografia.status === 'REPROVADA'
+                  }">
+                    {{ monografia.status }}
+                  </span>
+                </p>
+              </div>
+              <div class="info-item">
+                <p><strong>Orientador:  </strong> <span>{{ monografia.orientadorNomeCompleto }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Campo de Estudo:  </strong> <span>{{ monografia.especialidade }}</span></p>
+              </div>
+            </div>
+
+            <div class="col-md-6" *ngIf="monografia">
+              <h3 class="mb-4"><strong>Documentos da Monografia</strong></h3>
+              <div class="documentos-container">
+                <div class="documento-item">
+                  <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                    ngbTooltip="Baixar Extrato Bancário" container="body"
+                    (click)="baixarDocumento(monografia.linkExtratoBancario)">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                    <span class="text-primary">Extrato Bancário</span>
+                    <i class="fas fa-download text-success"></i>
+                  </button>
+                </div>
+                <div class="documento-item">
+                  <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                    ngbTooltip="Baixar Declaração de Notas" container="body"
+                    (click)="baixarDocumento(monografia.linkDeclaracaoNotas)">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                    <span class="text-primary">Declaração de Notas</span>
+                    <i class="fas fa-download text-success"></i>
+                  </button>
+                </div>
+                <div class="documento-item">
+                  <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                    ngbTooltip="Baixar Termo do Orientador" container="body"
+                    (click)="baixarDocumento(monografia.linkTermoOrientador)">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                    <span class="text-primary">Termo do Orientador</span>
+                    <i class="fas fa-download text-success"></i>
+                  </button>
+                </div>
+                <div class="documento-item">
+                  <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                    ngbTooltip="Baixar Projeto" container="body" (click)="baixarDocumento(monografia.linkProjeto)">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                    <span class="text-primary">Projeto</span>
+                    <i class="fas fa-download text-success"></i>
+                  </button>
+                </div>
+                <div class="documento-item">
+                  <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                    ngbTooltip="Baixar Documento BI" container="body"
+                    (click)="baixarDocumento(monografia.linkDocumentoBi)">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                    <span class="text-primary">Documento BI</span>
+                    <i class="fas fa-download text-success"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -63,6 +63,13 @@ export class VerMonografiaComponent implements OnInit {
     document.body.removeChild(link);
   }
 
- 
+  atualizarMonografia(id: string): void {
+    this.router.navigate(['/aluno/atualizar-monografia', id]);
+  }
+
+  DetalheMonografia(id: string): void {
+    this.router.navigate(['/aluno/detalhe-monografia', id]);
+  }
+
 
 }
