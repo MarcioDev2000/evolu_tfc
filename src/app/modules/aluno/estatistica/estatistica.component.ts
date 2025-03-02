@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import * as Chart from 'chart.js';
 import { MonografiaService } from "src/app/shared/services/monografia.service";
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-estatistica',
   templateUrl: './estatistica.component.html',
@@ -17,6 +18,13 @@ export class EstatisticaComponent implements OnInit {
     diasNoStatus: 0,
     chanceAprovacao: ''
   };
+
+  estatisticasStatus: any = {
+    Aprovado: 0,
+    Em_Revisao: 0,
+    Pendente: 0
+  };
+
   public canvas: any;
   public ctx: CanvasRenderingContext2D;
   public datasets: any;
@@ -41,6 +49,7 @@ export class EstatisticaComponent implements OnInit {
       const userData = JSON.parse(userDataString);
       const alunoId = userData.id;
 
+      // Carrega as estatísticas gerais
       this.monografiaService.getEstatisticasAluno(alunoId).subscribe(
         (data: any) => {
           this.estatisticas = data;
@@ -49,6 +58,17 @@ export class EstatisticaComponent implements OnInit {
         (error: any) => {
           console.error('Erro ao carregar estatísticas da monografia:', error);
           Swal.fire('Erro', 'Não foi possível carregar as estatísticas.', 'error');
+        }
+      );
+
+      // Carrega as estatísticas de status
+      this.monografiaService.getEstatisticasStatusPorAlunoId(alunoId).subscribe(
+        (data: any) => {
+          this.estatisticasStatus = data;
+        },
+        (error: any) => {
+          console.error('Erro ao carregar estatísticas de status:', error);
+          Swal.fire('Erro', 'Não foi possível carregar as estatísticas de status.', 'error');
         }
       );
     } else {
@@ -85,5 +105,4 @@ export class EstatisticaComponent implements OnInit {
       }
     });
   }
-
 }

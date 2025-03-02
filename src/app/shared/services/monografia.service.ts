@@ -206,7 +206,7 @@ getMonografiaByAlunoId(alunoId: string): Observable<any> {
     );
   }
 
-  
+
 getEstatisticasAluno(alunoId: string): Observable<any> {
   return this.http.get<any>(`${environment.API_URL}/monografias/aluno/${alunoId}/estatisticas`).pipe(
     catchError((error) => {
@@ -215,6 +215,17 @@ getEstatisticasAluno(alunoId: string): Observable<any> {
     })
   );
 }
+
+getEstatisticasStatusPorAlunoId(alunoId: string): Observable<{ [key: string]: number }> {
+  return this.http.get<{ [key: string]: number }>(`${environment.API_URL}/monografias/aluno/${alunoId}/estatisticas-status`).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar estatísticas de status do aluno:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
 
 
   // Visualizar documento específico de uma monografia
