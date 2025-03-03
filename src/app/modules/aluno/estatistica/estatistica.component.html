@@ -1,74 +1,46 @@
 <div class="content">
- 
-  <!-- Novos Cards para Aprovado, Em_Revisao e Pendente -->
+  <!-- Cards para Aprovado, Em Revisão e Pendente -->
   <div class="row">
     <!-- Card para Aprovado -->
-    <div class="col-lg-4">
-      <div class="card card-chart chart">
-        <div class="card-header">
-          <h5 class="card-category">Status: Aprovado</h5>
-          <h3 class="card-title">
-            <i class="tim-icons icon-check-2 text-success"></i>
-            {{ estatisticasStatus.Aprovado }}
-          </h3>
-        </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Status: Aprovado</div>
         <div class="card-body">
-          <div class="chart-area">
-            <canvas id="chartAprovado"></canvas>
-          </div>
+          <h5 class="card-title">{{ estatisticasStatus.Aprovado }}</h5>
         </div>
       </div>
     </div>
 
     <!-- Card para Em Revisão -->
-    <div class="col-lg-4">
-      <div class="card card-chart chart">
-        <div class="card-header">
-          <h5 class="card-category">Status: Em Revisão</h5>
-          <h3 class="card-title">
-            <i class="tim-icons icon-refresh-02 text-warning"></i>
-            {{ estatisticasStatus.Em_Revisao }}
-          </h3>
-        </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Status: Em Revisão</div>
         <div class="card-body">
-          <div class="chart-area">
-            <canvas id="chartEmRevisao"></canvas>
-          </div>
+          <h5 class="card-title">{{ estatisticasStatus.Em_Revisao }}</h5>
         </div>
       </div>
     </div>
 
     <!-- Card para Pendente -->
-    <div class="col-lg-4">
-      <div class="card card-chart chart">
-        <div class="card-header">
-          <h5 class="card-category">Status: Pendente</h5>
-          <h3 class="card-title">
-            <i class="tim-icons icon-alert-circle-exc text-danger"></i>
-            {{ estatisticasStatus.Pendente }}
-          </h3>
-        </div>
+    <div class="col-md-4">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Status: Pendente</div>
         <div class="card-body">
-          <div class="chart-area">
-            <canvas id="chartPendente"></canvas>
-          </div>
+          <h5 class="card-title">{{ estatisticasStatus.Pendente }}</h5>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="card card-chart">
+
+  <!-- Gráfico de Estatísticas -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card" style=" background-color: white;">
         <div class="card-header">
-          <div class="row">
-            <div class="col-sm-6 text-left">
-              <h5 class="card-category">Estatísticas da Monografia</h5>
-              <h2 class="card-title">Desempenho Geral</h2>
-            </div>
-          </div>
+          <h5 class="card-title">Estatísticas da Monografia</h5>
         </div>
         <div class="card-body">
-          <div class="chart-area">
+          <div class="chart-container" style="position: relative; height: 400px;  background-color: white;">
             <canvas id="estatisticaChart"></canvas>
           </div>
         </div>

@@ -35,6 +35,10 @@ const routes: Routes = [
     path : 'aluno',
     loadChildren:() =>import('./modules/aluno/aluno.module').then((m)=> m.AlunoModule)
   },
+  {
+    path : 'orientador',
+    loadChildren:() =>import('./modules/orientador/orientador.module').then((m)=> m.OrientadorModule)
+  },
 ];
 
 @NgModule({

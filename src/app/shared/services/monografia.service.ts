@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, tap } from 'rxjs/operators';
@@ -83,27 +83,29 @@ export class MonografiaService {
       );
   }
 
-  // Revisão do orientador
+
   reviewMonografia(
     monografiaId: string,
     novoStatus: string,
     descricao: string,
     orientadorId: string
   ): Observable<any> {
-    const body = {
-      novoStatus,
-      descricao,
-      orientadorId,
-    };
+    // Cria os parâmetros de consulta
+    const params = new HttpParams()
+      .set('novoStatus', novoStatus)
+      .set('descricao', descricao)
+      .set('orientadorId', orientadorId);
 
+    // Faz a requisição PUT com os parâmetros de consulta
     return this.http
       .put<any>(
         `${environment.API_URL}/monografias/${monografiaId}/revisao-orientador`,
-        body
+        null, // O corpo da requisição é null, pois os dados estão nos parâmetros
+        { params }
       )
       .pipe(
         tap(() => {
-          this.showMessage('Revisão do orientador realizada com sucesso!');
+          console.log('Revisão do orientador realizada com sucesso!');
         }),
         catchError((error) => {
           console.error('Erro ao revisar monografia:', error);
@@ -225,7 +227,14 @@ getEstatisticasStatusPorAlunoId(alunoId: string): Observable<{ [key: string]: nu
   );
 }
 
-
+getEstatisticasPorOrientador(orientadorId: string): Observable<any> {
+  return this.http.get<any>(`${environment.API_URL}/monografias/orientador/${orientadorId}/estatisticas`).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar estatísticas do orientador:', error);
+      return throwError(error);
+    })
+  );
+}
 
 
   // Visualizar documento específico de uma monografia

@@ -10,7 +10,7 @@ import { PerfilComponent } from "./perfil/perfil.component";
 export const ALUNO_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'estatistica',
     pathMatch: 'full'
   },
   {

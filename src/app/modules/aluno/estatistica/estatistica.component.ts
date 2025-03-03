@@ -82,7 +82,7 @@ export class EstatisticaComponent implements OnInit {
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Revisões', 'Tempo Médio', 'Dias no Status', 'Chance de Aprovação'],
+        labels: ['Revisões', 'Tempo Médio (dias)', 'Dias no Status', 'Chance de Aprovação (%)'],
         datasets: [{
           label: 'Estatísticas da Monografia',
           data: [
@@ -91,16 +91,61 @@ export class EstatisticaComponent implements OnInit {
             this.estatisticas.diasNoStatus,
             parseFloat(this.estatisticas.chanceAprovacao)
           ],
-          backgroundColor: ['#007bff', '#28a745', '#ffc107', '#dc3545']
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.6)', // Azul
+            'rgba(75, 192, 192, 0.6)', // Verde
+            'rgba(255, 206, 86, 0.6)', // Amarelo
+            'rgba(255, 99, 132, 0.6)'  // Vermelho
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 1
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
-          yAxes: [{ // Configuração para o eixo Y
+          yAxes: [{
             ticks: {
-              beginAtZero: true // Começa o eixo Y a partir de zero
+              beginAtZero: true
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Valores'
+            }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Categorias'
             }
           }]
+        },
+        legend: {
+          display: true,
+          position: 'top',
+          labels: {
+            fontColor: '#333',
+            fontSize: 14
+          }
+        },
+        tooltips: {
+          enabled: true,
+          mode: 'index',
+          intersect: false,
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          titleFontSize: 16,
+          bodyFontSize: 14,
+          footerFontSize: 12
+        },
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuart'
         }
       }
     });
