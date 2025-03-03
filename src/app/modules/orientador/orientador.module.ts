@@ -14,12 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
+import { GestaoAlunosComponent } from './gestao-alunos/gestao-alunos.component';
 
 @NgModule({
   declarations: [
     EstatisticaComponent,
     PerfilComponent,
-    VerMonografiaComponent
+    VerMonografiaComponent,
+    GestaoAlunosComponent
   ],
   imports: [
     CommonModule,

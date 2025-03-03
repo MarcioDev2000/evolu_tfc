@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { EstatisticaComponent } from "./estatistica/estatistica.component";
 import { DashboardComponent } from "src/app/shared/components/dashboard/dashboard.component";
 import { VerMonografiaComponent } from "./ver-monografia/ver-monografia.component";
+import { GestaoAlunosComponent } from "./gestao-alunos/gestao-alunos.component";
 
 
 export const ORIENTADOR_ROUTES: Routes = [
@@ -22,6 +23,10 @@ export const ORIENTADOR_ROUTES: Routes = [
       {
         path: 'monografias',
         component: VerMonografiaComponent
+      },
+      {
+        path: 'alunos',
+        component: GestaoAlunosComponent
       },
 
     ]

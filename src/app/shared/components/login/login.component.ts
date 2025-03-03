@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    // Verificar se há dados de usuário no localStorage ao inicializar o componente
     const userDataString = localStorage.getItem('user');
     if (userDataString) {
       const userData = JSON.parse(userDataString);

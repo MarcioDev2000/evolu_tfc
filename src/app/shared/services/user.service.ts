@@ -177,4 +177,17 @@ export class UserService {
       })
     );
   }
+
+  getAlunosPorOrientador(orientadorId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/orientadores/${orientadorId}/alunos`).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar alunos do orientador:', error);
+        this.showMessage('Erro ao carregar alunos.');
+        return throwError(error);
+      })
+    );
+  }
+
+
+
 }
