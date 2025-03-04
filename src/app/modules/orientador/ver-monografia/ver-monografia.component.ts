@@ -113,4 +113,9 @@ export class VerMonografiaComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  DetalheMonografia(id: string): void {
+    this.router.navigate(['/orientador/detalhe-monografia', id]);
+  }
+
 }

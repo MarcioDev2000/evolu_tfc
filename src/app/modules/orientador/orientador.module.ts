@@ -15,13 +15,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { GestaoAlunosComponent } from './gestao-alunos/gestao-alunos.component';
+import { DetalhesAlunosComponent } from './detalhes-alunos/detalhes-alunos.component';
 
 @NgModule({
   declarations: [
     EstatisticaComponent,
     PerfilComponent,
     VerMonografiaComponent,
-    GestaoAlunosComponent
+    GestaoAlunosComponent,
+    DetalhesAlunosComponent
   ],
   imports: [
     CommonModule,

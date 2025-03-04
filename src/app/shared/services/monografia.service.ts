@@ -260,4 +260,20 @@ visualizarExtratoBancario(id: string): Observable<Blob> {
     })
   );
 }
+
+
+getMonografiaByOrientadorId(orientadorId: string, monografiaId: string): Observable<any> {
+  return this.http.get<any>(
+    `${environment.API_URL}/monografias/orientador/${orientadorId}/monografias/${monografiaId}`
+  ).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar monografia:', error);
+      this.showMessage('Erro ao carregar monografia.');
+      return throwError(error);
+    })
+  );
+}
+
+
+
 }

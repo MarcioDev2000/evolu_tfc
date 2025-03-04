@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-          <h3 class="title mb-0">Minha Monografia</h3>
+          <h3 class="title mb-0">Detalhe da Monografia {{ monografia.alunoNomeCompleto }}</h3>
           <div class="d-flex justify-content-end">
             <button class="btn btn-light btn-sm" [routerLink]="'/orientador/monografias'">
               <i class="fas fa-arrow-left"></i> Voltar para Monografias
@@ -29,7 +29,7 @@
                 </p>
               </div>
               <div class="info-item">
-                <p><strong>Orientador:  </strong> <span>{{ monografia.orientadorNomeCompleto }}</span></p>
+                <p><strong>Aluno:  </strong> <span>{{ monografia.alunoNomeCompleto }}</span></p>
               </div>
               <div class="info-item">
                 <p><strong>Campo de Estudo:  </strong> <span>{{ monografia.especialidade }}</span></p>

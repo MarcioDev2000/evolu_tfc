@@ -3,6 +3,7 @@ import { EstatisticaComponent } from "./estatistica/estatistica.component";
 import { DashboardComponent } from "src/app/shared/components/dashboard/dashboard.component";
 import { VerMonografiaComponent } from "./ver-monografia/ver-monografia.component";
 import { GestaoAlunosComponent } from "./gestao-alunos/gestao-alunos.component";
+import { DetalhesAlunosComponent } from "./detalhes-alunos/detalhes-alunos.component";
 
 
 export const ORIENTADOR_ROUTES: Routes = [
@@ -28,7 +29,10 @@ export const ORIENTADOR_ROUTES: Routes = [
         path: 'alunos',
         component: GestaoAlunosComponent
       },
-
+      {
+        path: 'detalhe-monografia/:id',
+        component: DetalhesAlunosComponent
+      },
     ]
   }
 ];
