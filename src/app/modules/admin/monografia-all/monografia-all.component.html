@@ -1,0 +1,128 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h3 class="title mb-0">Monografias dos Alunos</h3>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <input type="text" class="form-control" [(ngModel)]="filtro" (input)="applyFilter()" placeholder="Filtrar por tema ou status">
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th>Tema</th>
+                  <th>Status</th>
+                  <th>Aluno</th>
+                  <th>Campo de estudo</th>
+                  <th>Projeto</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let monografia of monografiasFiltradas">
+                  <td>{{ monografia.tema }}</td>
+                  <td>
+                    <span class="status" [ngClass]="{
+                      'badge badge-success': monografia.status === 'APROVADO',
+                      'badge badge-warning': monografia.status === 'PENDENTE',
+                      'badge badge-danger': monografia.status === 'EM_REVISAO'
+                    }">
+                      {{ monografia.status }}
+                    </span>
+                  </td>
+                  <td>{{ monografia.alunoNomeCompleto }}</td>
+                  <td>{{ monografia.especialidade }}</td>
+                  <td>
+                    <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                      ngbTooltip="Visualizar Projeto" container="body" (click)="visualizarDocumento(monografia.linkProjeto, 'projeto')">
+                      <i class="fas fa-file-pdf text-danger"></i>
+                      <span class="text-primary">Projeto</span>
+                      <i class="fas fa-eye text-info"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <!-- Botão para visualizar o Extrato Bancário -->
+                      <button class="btn btn-sm btn-outline-primary" (click)="visualizarDocumento(monografia.linkExtratoBancario, 'extrato_bancario')">
+                        <i class="fas fa-file-invoice-dollar"></i> Extrato
+                      </button>
+                      <!-- Botão para visualizar o Termo de Orientador -->
+                      <button class="btn btn-sm btn-outline-info" (click)="visualizarDocumento(monografia.linkTermoOrientador, 'termo_orientador')">
+                        <i class="fas fa-file-signature"></i> Termo
+                      </button>
+                      <!-- Botão para visualizar a Declaração de Notas -->
+                      <button class="btn btn-sm btn-outline-warning" (click)="visualizarDocumento(monografia.linkDeclaracaoNotas, 'declaracao_notas')">
+                        <i class="fas fa-file-alt"></i> Notas
+                      </button>
+                      <!-- Botão para visualizar o Documento de Identificação -->
+                      <button class="btn btn-sm btn-outline-secondary" (click)="visualizarDocumento(monografia.linkDocumentoBi, 'documento_bi')">
+                        <i class="fas fa-id-card"></i> Documento BI
+                      </button>
+                      <!-- Botão para abrir o modal de atualização -->
+                      <button class="btn btn-sm btn-outline-success" (click)="abrirModalAtualizacao(monografia, modalAtualizacao)">
+                        <i class="fas fa-sync-alt"></i> Atualizar
+                      </button>
+
+                      <button class="btn btn-sm btn-outline-info" (click)="DetalheMonografia(monografia.id)">
+                        <i class="fas fa-eye"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="monografiasFiltradas.length === 0">
+                  <td colspan="6" class="text-center text-muted py-4">
+                    <i class="fas fa-spinner fa-spin"></i> Nenhuma monografia encontrada.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Atualização -->
+<ng-template #modalAtualizacao let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Atualizar Monografia</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="status">Novo Status</label>
+        <select class="form-control" id="status" [(ngModel)]="novoStatus" name="status" style="color: black;">
+          <option value="" disabled selected>Selecione um status</option>
+          <option value="PENDENTE">Pendente</option>
+          <option value="EM_REVISAO">Em Revisão</option>
+          <option value="APROVADO">Aprovado</option>
+          <option value="DISPONIVEL">Disponível</option>
+          <option value="EM_PRE_DEFESA">Em Pré-Defesa</option>
+          <option value="OUTRO_STATUS">Outro Status</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <textarea
+          class="form-control"
+          id="descricao"
+          [(ngModel)]="descricao"
+          name="descricao"
+          rows="3"
+          style="color: black;"
+        ></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Cancelar')">Cancelar</button>
+    <button type="button" class="btn btn-danger" (click)="salvarAtualizacao(modal)">Salvar</button>
+  </div>
+</ng-template>

@@ -22,8 +22,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
-
-
 @NgModule({
   declarations: [
     RegistarComponent,

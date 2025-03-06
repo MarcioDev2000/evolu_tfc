@@ -188,6 +188,25 @@ export class UserService {
     );
   }
 
+  listarTodosAlunos(adminId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/usuarios/alunos?adminId=${adminId}`).pipe(
+      catchError((error) => {
+        console.error('Erro ao listar todos os alunos:', error);
+        this.showMessage('Erro ao carregar alunos.');
+        return throwError(error);
+      })
+    );
+  }
+
+  listarTodosOrientadores(adminId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/usuarios/orientadores?adminId=${adminId}`).pipe(
+      catchError((error) => {
+        console.error('Erro ao listar todos os orientadores:', error);
+        this.showMessage('Erro ao carregar orientadores.');
+        return throwError(error);
+      })
+    );
+  }
 
 
 }

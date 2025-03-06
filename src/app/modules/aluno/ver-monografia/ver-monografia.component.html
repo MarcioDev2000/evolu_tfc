@@ -5,10 +5,9 @@
         <div class="card-header bg-primary text-white">
           <h3 class="title mb-0">Minha Monografia</h3>
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="col-md-4 pr-md-1">
-
-            </div>
-            <button class="btn btn-light btn-sm" [routerLink]="'/aluno/add-monografia'">
+            <div class="col-md-4 pr-md-1"></div>
+            <!-- Botão de Inserir Monografia -->
+            <button class="btn btn-light btn-sm" [routerLink]="'/aluno/add-monografia'" [disabled]="monografia">
               <i class="fas fa-plus"></i> Inserir Monografia
             </button>
           </div>
@@ -27,7 +26,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngIf="monografia">
+                <!-- Exibe a monografia se existir -->
+                <tr *ngIf="monografia && !nenhumaMonografia">
                   <td>{{ monografia.tema }}</td>
                   <td>
                     <span class="status" [ngClass]="{
@@ -59,9 +59,18 @@
                     </div>
                   </td>
                 </tr>
-                <tr *ngIf="!monografia">
+
+                <!-- Exibe mensagem de carregamento -->
+                <tr *ngIf="carregando">
                   <td colspan="6" class="text-center text-muted py-4">
                     <i class="fas fa-spinner fa-spin"></i> Carregando monografia...
+                  </td>
+                </tr>
+
+                <!-- Exibe mensagem de "Nenhuma monografia encontrada" -->
+                <tr *ngIf="nenhumaMonografia && !carregando">
+                  <td colspan="6" class="text-center text-muted py-4">
+                    <i class="fas fa-exclamation-circle"></i> Nenhuma monografia encontrada.
                   </td>
                 </tr>
               </tbody>

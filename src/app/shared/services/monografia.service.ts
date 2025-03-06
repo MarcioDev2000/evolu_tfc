@@ -131,16 +131,17 @@ getMonografiaByAlunoId(alunoId: string): Observable<any> {
     descricao: string,
     adminId: string
   ): Observable<any> {
-    const body = {
-      novoStatus,
-      descricao,
-      adminId,
-    };
+    const params = new HttpParams()
+    .set('novoStatus', novoStatus)
+    .set('descricao', descricao)
+    .set('adminId', adminId);
+
 
     return this.http
       .put<any>(
         `${environment.API_URL}/monografias/${monografiaId}/revisao-admin`,
-        body
+        null, // O corpo da requisição é null, pois os dados estão nos parâmetros
+        { params }
       )
       .pipe(
         tap(() => {
@@ -152,18 +153,21 @@ getMonografiaByAlunoId(alunoId: string): Observable<any> {
         })
       );
   }
-
   // Lista monografias aprovadas para revisão do admin
-  getMonografiasAprovadas(): Observable<any> {
+  getMonografiasAprovadasPorAdmin(adminId: string): Observable<any> {
+    const params = new HttpParams().set('adminId', adminId);
+  
     return this.http
-      .get<any>(`${environment.API_URL}/monografias/aprovadas`)
+      .get<any>(`${environment.API_URL}/monografias/aprovadas`, { params })
       .pipe(
         catchError((error) => {
-          console.error('Erro ao buscar monografias aprovadas:', error);
+          console.error('Erro ao buscar monografias aprovadas pelo admin:', error);
+          this.showMessage('Erro ao carregar monografias aprovadas.');
           return throwError(error);
         })
       );
   }
+  
 
   // Baixar ou visualizar documentos da monografia
   getDocumento(
@@ -217,6 +221,19 @@ getEstatisticasAluno(alunoId: string): Observable<any> {
     })
   );
 }
+
+GetEstatisticasAdmin(adminId: string): Observable<any> {
+  return this.http.get<any>(`${environment.API_URL}/monografias/admin/estatisticas`, {
+    params: { adminId }
+  }).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar estatísticas do admin:', error);
+      return throwError(error);
+    })
+  );
+}
+
+
 
 getEstatisticasStatusPorAlunoId(alunoId: string): Observable<{ [key: string]: number }> {
   return this.http.get<{ [key: string]: number }>(`${environment.API_URL}/monografias/aluno/${alunoId}/estatisticas-status`).pipe(

@@ -1,0 +1,50 @@
+<div class="content">
+  <div class="row">
+    <!-- Card para Total de Orientadores -->
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Total de Orientadores</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ estatisticasAdmin.totalOrientadores }}</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card para Total de Monografias Aprovadas -->
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3">
+        <div class="card-header">Monografias Aprovadas</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ estatisticasAdmin.totalMonografiasAprovadas }}</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card para Total de Alunos -->
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Total de Alunos</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ estatisticasAdmin.totalAlunos }}</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card para Total de Monografias em Revisão -->
+    <div class="col-md-3">
+      <div class="card text-white bg-danger mb-3">
+        <div class="card-header">Monografias em Revisão</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ estatisticasAdmin.totalMonografiasEmRevisao }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico de Estatísticas -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <canvas id="estatisticaChart"></canvas>
+    </div>
+  </div>
+</div>

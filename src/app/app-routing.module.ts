@@ -39,6 +39,10 @@ const routes: Routes = [
     path : 'orientador',
     loadChildren:() =>import('./modules/orientador/orientador.module').then((m)=> m.OrientadorModule)
   },
+  {
+    path : 'admin',
+    loadChildren:() =>import('./modules/admin/admin.module').then((m)=> m.AdminModule)
+  },
 ];
 
 @NgModule({

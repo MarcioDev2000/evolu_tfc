@@ -12,6 +12,8 @@ export class VerMonografiaComponent implements OnInit {
 
   monografia: any = null;
   filtro: string = '';
+  carregando: boolean = true; // Variável para controlar o estado de carregamento
+  nenhumaMonografia: boolean = false; // Variável para controlar a exibição da mensagem de "Nenhuma monografia encontrada"
 
   constructor(
     private monografiaService: MonografiaService,
@@ -30,11 +32,22 @@ export class VerMonografiaComponent implements OnInit {
 
       this.monografiaService.getMonografiaByAlunoId(alunoId).subscribe({
         next: (data) => {
-          this.monografia = data;
+          this.carregando = false; // Finaliza o estado de carregamento
+          if (!data || Object.keys(data).length === 0) {
+            this.nenhumaMonografia = true; // Define que não há monografias
+          } else {
+            this.nenhumaMonografia = false; // Define que há monografias
+            this.monografia = data;
+          }
         },
         error: (error) => {
+          this.carregando = false; // Finaliza o estado de carregamento
           console.error('Erro ao buscar monografia:', error);
-          Swal.fire('Erro', 'Não foi possível carregar a monografia.', 'error');
+          if (error.status === 500 && error.error?.message?.includes('Nenhuma monografia encontrada')) {
+            this.nenhumaMonografia = true; // Define que não há monografias
+          } else {
+            Swal.fire('Erro', 'Não foi possível carregar a monografia.', 'error');
+          }
         }
       });
     } else {
@@ -70,6 +83,4 @@ export class VerMonografiaComponent implements OnInit {
   DetalheMonografia(id: string): void {
     this.router.navigate(['/aluno/detalhe-monografia', id]);
   }
-
-
 }

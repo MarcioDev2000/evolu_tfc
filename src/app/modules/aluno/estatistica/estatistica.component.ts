@@ -18,6 +18,7 @@ export class EstatisticaComponent implements OnInit {
     diasNoStatus: 0,
     chanceAprovacao: ''
   };
+  nenhumaMonografia: boolean = false;
 
   estatisticasStatus: any = {
     Aprovado: 0,
@@ -49,15 +50,25 @@ export class EstatisticaComponent implements OnInit {
       const userData = JSON.parse(userDataString);
       const alunoId = userData.id;
 
-      // Carrega as estatísticas gerais
+      // Verifica se há monografias para o aluno
       this.monografiaService.getEstatisticasAluno(alunoId).subscribe(
         (data: any) => {
-          this.estatisticas = data;
-          this.renderizarGrafico(); // Renderiza o gráfico após carregar os dados
+          if (!data || Object.keys(data).length === 0) {
+            this.nenhumaMonografia = true; // Define que não há monografias
+            Swal.fire('Aviso', 'Nenhuma monografia encontrada para este aluno.', 'info');
+          } else {
+            this.nenhumaMonografia = false; // Define que há monografias
+            this.estatisticas = data;
+            this.renderizarGrafico(); // Renderiza o gráfico apenas se houver dados
+          }
         },
         (error: any) => {
           console.error('Erro ao carregar estatísticas da monografia:', error);
-          Swal.fire('Erro', 'Não foi possível carregar as estatísticas.', 'error');
+          if (error.status === 500 && error.error?.message?.includes('Nenhuma monografia encontrada')) {
+            this.nenhumaMonografia = true; // Define que não há monografias
+          } else {
+            Swal.fire('Erro', 'Não foi possível carregar as estatísticas.', 'error');
+          }
         }
       );
 
@@ -68,7 +79,11 @@ export class EstatisticaComponent implements OnInit {
         },
         (error: any) => {
           console.error('Erro ao carregar estatísticas de status:', error);
-          Swal.fire('Erro', 'Não foi possível carregar as estatísticas de status.', 'error');
+          if (error.status === 500 && error.error?.message?.includes('Nenhuma monografia encontrada')) {
+            this.nenhumaMonografia = true; // Define que não há monografias
+          } else {
+            Swal.fire('Erro', 'Não foi possível carregar as estatísticas de status.', 'error');
+          }
         }
       );
     } else {
