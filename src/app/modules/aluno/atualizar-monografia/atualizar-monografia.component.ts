@@ -50,6 +50,7 @@ export class AtualizarMonografiaComponent implements OnInit {
       termoOrientador: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
       projeto: [null, this.validateFileType(['pdf', 'doc', 'docx'])],
       documentoBi: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
+      termoDoAluno: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
       alunoId: [''],
     });
   }

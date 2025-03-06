@@ -5,7 +5,7 @@
         <div class="card-header bg-primary text-white">
           <h3 class="title mb-0">Minha Monografia</h3>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-light btn-sm" [routerLink]="'/orientador/monografias'">
+            <button class="btn btn-light btn-sm" [routerLink]="'/aluno/inscricao-monografia'">
               <i class="fas fa-arrow-left"></i> Voltar para Monografias
             </button>
           </div>
@@ -96,6 +96,16 @@
                     (click)="baixarDocumento(monografia.linkDocumentoBi)">
                     <i class="fas fa-file-pdf text-danger"></i>
                     <span class="text-primary">Documento do BI</span>
+                    <i class="fas fa-download text-success"></i>
+                  </button>
+                </div>
+
+                <div class="documento-item">
+                  <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                    ngbTooltip="Baixar Termo do Aluno" container="body"
+                    (click)="baixarDocumento(monografia.linkTermoDoAluno)">
+                    <i class="fas fa-file-pdf text-danger"></i>
+                    <span class="text-primary">Termo do Aluno</span>
                     <i class="fas fa-download text-success"></i>
                   </button>
                 </div>

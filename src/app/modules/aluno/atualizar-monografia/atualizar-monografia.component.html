@@ -56,7 +56,7 @@
                 </div>
               </div>
 
-
+              <!-- Campo: Orientador -->
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Orientador</label>
@@ -179,6 +179,26 @@
                     style="color: #fd5d93;"
                   >
                     O documento de identificação deve ser um arquivo PDF, JPEG ou PNG.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Campo: Termo do Aluno -->
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Termo do Aluno</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    (change)="onFileChange($event, 'termoDoAluno')"
+                    accept=".pdf, .jpeg, .png"
+                  />
+                  <div
+                    *ngIf="monografiaForm.get('termoDoAluno')?.invalid && monografiaForm.get('termoDoAluno')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O termo do aluno é obrigatório e deve ser um arquivo PDF, JPEG ou PNG.
                   </div>
                 </div>
               </div>

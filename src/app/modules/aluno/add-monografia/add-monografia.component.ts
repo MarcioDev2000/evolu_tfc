@@ -48,6 +48,7 @@ export class AddMonografiaComponent implements OnInit {
       termoOrientador: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
       projeto: [null, [Validators.required, this.validateFileType(['pdf', 'doc', 'docx'])]],
       documentoBi: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
+      termoDoAluno: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
       alunoId: [''],
     });
   }
@@ -141,6 +142,7 @@ export class AddMonografiaComponent implements OnInit {
     formData.append('termoOrientador', this.monografiaForm.get('termoOrientador')?.value);
     formData.append('projeto', this.monografiaForm.get('projeto')?.value);
     formData.append('documentoBi', this.monografiaForm.get('documentoBi')?.value);
+    formData.append('termoDoAluno', this.monografiaForm.get('termoDoAluno')?.value);
     formData.append('alunoId', this.monografiaForm.get('alunoId')?.value);
 
     this.monografiaService.createMonografia(formData).subscribe(
