@@ -17,6 +17,7 @@ import { AlunosAllComponent } from './alunos-all/alunos-all.component';
 import { MonografiaAllComponent } from './monografia-all/monografia-all.component';
 import { DetalheAlunoComponent } from './detalhe-aluno/detalhe-aluno.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PreDefesaComponent } from './pre-defesa/pre-defesa.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     AlunosAllComponent,
     MonografiaAllComponent,
     DetalheAlunoComponent,
-    PerfilComponent
+    PerfilComponent,
+    PreDefesaComponent
   ],
   imports: [
     CommonModule,

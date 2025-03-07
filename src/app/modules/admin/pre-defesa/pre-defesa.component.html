@@ -1,0 +1,136 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h3 class="title">Agendar Pré-Defesa</h3>
+        </div>
+        <div class="card-body">
+          <!-- Formulário reativo com (ngSubmit) e formGroup -->
+          <form (ngSubmit)="onSubmit()" [formGroup]="preDefesaForm">
+            <div class="row">
+              <!-- Campo: Tema da Monografia (somente leitura) -->
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Tema da Monografia</label>
+                  <input
+                    formControlName="temaMonografia"
+                    class="form-control"
+                    type="text"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              
+              <!-- Campo: Presidente -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Presidente</label>
+                  <select class="form-control" formControlName="presidenteId" required>
+                    <option value="" disabled selected>Selecione um presidente</option>
+                    <option *ngFor="let orientador of orientadores" [value]="orientador.id">
+                      {{ orientador.nomeCompleto }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="preDefesaForm.get('presidenteId')?.invalid && preDefesaForm.get('presidenteId')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O presidente é obrigatório.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Vogal</label>
+                  <select class="form-control" formControlName="vogalId" required>
+                    <option value="" disabled selected>Selecione um vogal</option>
+                    <option *ngFor="let orientador of orientadores" [value]="orientador.id">
+                      {{ orientador.nomeCompleto }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="preDefesaForm.get('vogalId')?.invalid && preDefesaForm.get('vogalId')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O vogal é obrigatório.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Campo: Vogal -->
+        
+              <!-- Campo: Data de Início -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Data de Início</label>
+                  <input
+                    formControlName="dataInicio"
+                    class="form-control"
+                    type="datetime-local"
+                    required
+                  />
+                  <div
+                    *ngIf="preDefesaForm.get('dataInicio')?.invalid && preDefesaForm.get('dataInicio')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    A data de início é obrigatória.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Data de Fim</label>
+                  <input
+                    formControlName="dataFim"
+                    class="form-control"
+                    type="datetime-local"
+                    required
+                  />
+                  <div
+                    *ngIf="preDefesaForm.get('dataFim')?.invalid && preDefesaForm.get('dataFim')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    A data de fim é obrigatória.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Campo: Descrição -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Descrição (Opcional)</label>
+                  <textarea
+                    formControlName="descricao"
+                    class="form-control"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botão de Submissão -->
+            <div class="card-footer text-center">
+              <button class="btn btn-fill btn-danger" type="submit" [disabled]="preDefesaForm.invalid">
+                Agendar Pré-Defesa
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

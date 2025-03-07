@@ -120,4 +120,8 @@ export class MonografiaAllComponent implements OnInit {
   DetalheMonografia(id: string): void {
     this.router.navigate(['/admin/detalhe-monografia', id]);
   }
+
+  PreDefesa(id: string): void {
+    this.router.navigate(['/admin/pre-defesa', id]);
+  }
 }

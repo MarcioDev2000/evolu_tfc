@@ -23,7 +23,7 @@ export class DetalheAlunoComponent implements OnInit {
     if (id) {
       this.carregarMonografia(id);
     } else {
-      this.router.navigate(['/aluno/monografias']);
+      this.router.navigate(['/admin/monografias']);
     }
   }
 

@@ -6,6 +6,7 @@ import { OrientadoresAllComponent } from "./orientadores-all/orientadores-all.co
 import { MonografiaAllComponent } from "./monografia-all/monografia-all.component";
 import { DetalheAlunoComponent } from "./detalhe-aluno/detalhe-aluno.component";
 import { PerfilComponent } from "./perfil/perfil.component";
+import { PreDefesaComponent } from "./pre-defesa/pre-defesa.component";
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
@@ -40,6 +41,10 @@ export const ADMIN_ROUTES: Routes = [
         path: 'perfil',
         component: PerfilComponent
       },
+      {
+        path: 'pre-defesa/:id',
+        component: PreDefesaComponent
+      }
 
     ]
   }
