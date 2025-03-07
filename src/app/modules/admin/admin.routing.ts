@@ -4,7 +4,8 @@ import { DashboardComponent } from "src/app/shared/components/dashboard/dashboar
 import { AlunosAllComponent } from "./alunos-all/alunos-all.component";
 import { OrientadoresAllComponent } from "./orientadores-all/orientadores-all.component";
 import { MonografiaAllComponent } from "./monografia-all/monografia-all.component";
-
+import { DetalheAlunoComponent } from "./detalhe-aluno/detalhe-aluno.component";
+import { PerfilComponent } from "./perfil/perfil.component";
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
@@ -30,6 +31,14 @@ export const ADMIN_ROUTES: Routes = [
       {
         path: 'monografias',
         component: MonografiaAllComponent
+      },
+      {
+        path: 'detalhe-monografia/:id',
+        component: DetalheAlunoComponent
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent
       },
 
     ]

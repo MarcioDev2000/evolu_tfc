@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { OrientadoresAllComponent } from './orientadores-all/orientadores-all.component';
 import { AlunosAllComponent } from './alunos-all/alunos-all.component';
 import { MonografiaAllComponent } from './monografia-all/monografia-all.component';
+import { DetalheAlunoComponent } from './detalhe-aluno/detalhe-aluno.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { MonografiaAllComponent } from './monografia-all/monografia-all.componen
     EstatisticaComponent,
     OrientadoresAllComponent,
     AlunosAllComponent,
-    MonografiaAllComponent
+    MonografiaAllComponent,
+    DetalheAlunoComponent,
+    PerfilComponent
   ],
   imports: [
     CommonModule,

@@ -2,10 +2,18 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card shadow-sm">
+        <!-- Cabeçalho do Card -->
         <div class="card-header bg-primary text-white">
-          <h3 class="title mb-0">Monografias dos Alunos</h3>
+          <h3 class="title mb-0">Gestão de Alunos</h3>
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <input type="text" class="form-control" [(ngModel)]="filtro" (input)="applyFilter()" placeholder="Filtrar por tema ou status">
+            <div class="col-md-4 pr-md-1">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Filtrar alunos..."
+                [(ngModel)]="filtro"
+                (input)="applyFilter()">
+            </div>
           </div>
         </div>
         <div class="card-body">

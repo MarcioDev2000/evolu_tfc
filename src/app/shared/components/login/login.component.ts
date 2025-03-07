@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -42,15 +43,17 @@ export class LoginComponent implements OnInit {
       Swal.fire('Erro', 'Email e senha são campos obrigatórios.', 'error');
       return;
     }
-
+  
     this.userService.login(this.user).pipe(
       catchError((error) => {
-        if (error.status === 400 && error.error.senha) {
+        if (error.status === 401 && error.error.message === "Credenciais inválidas") {
           this.openSnackBar('Erro', 'Senha incorreta. Verifique e tente novamente.', 'error');
         } else if (error.error.email) {
           this.openSnackBar('Erro', 'E-mail incorreto. Verifique e tente novamente.', 'error');
+        } else {
+          this.openSnackBar('Erro', 'Ocorreu um erro ao tentar fazer login. Tente novamente.', 'error');
         }
-        return error;
+        return throwError(error); // Reenvia o erro para o fluxo de observáveis
       })
     ).subscribe(response => {
       // Armazenar dados no localStorage
@@ -60,7 +63,6 @@ export class LoginComponent implements OnInit {
       this.redirectToUserPage(response);
     });
   }
-
 
   private redirectToUserPage(userData: any): void {
     this.router.navigate([userData.rota]);

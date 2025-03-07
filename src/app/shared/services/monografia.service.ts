@@ -291,6 +291,20 @@ getMonografiaByOrientadorId(orientadorId: string, monografiaId: string): Observa
   );
 }
 
+// Obtém uma monografia aprovada pelo admin
+getMonografiaAprovadaPorAdmin(adminId: string, monografiaId: string): Observable<any> {
+  const params = new HttpParams()
+    .set('adminId', adminId);
 
+  return this.http
+    .get<any>(`${environment.API_URL}/monografias/aprovadas/${adminId}/${monografiaId}`, { params })
+    .pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar monografia aprovada pelo admin:', error);
+        this.showMessage('Erro ao carregar monografia aprovada.');
+        return throwError(error);
+      })
+    );
+}
 
 }
