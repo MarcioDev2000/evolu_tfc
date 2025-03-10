@@ -53,15 +53,7 @@ export class UserService {
   }
 
   create(user: User): Observable<any> {
-    return this.http.post(`${environment.API_URL}/usuarios/`, user).pipe(
-      catchError(error => {
-        let errorMessage = 'Erro ao criar usuário.';
-        if (error.error && error.error.email) {
-          errorMessage = error.error.email[0];
-        }
-        return this.handleError(error, errorMessage);
-      })
-    );
+    return this.http.post(`${environment.API_URL}/usuarios/`, user)
   }
 
 

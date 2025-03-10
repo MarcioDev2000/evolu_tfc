@@ -1,0 +1,67 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h3 class="title mb-0">Detalhes da Pré-Defesa de {{ marcarPreDefesa.alunoNomeCompleto }}</h3>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-light btn-sm" [routerLink]="'/admin/calendario'">
+              <i class="fas fa-arrow-left"></i> Voltar para Calendário
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row" *ngIf="marcarPreDefesa">
+            <!-- Primeira Coluna: Informações principais -->
+            <div class="col-md-6">
+              <h3 class="mb-4"><strong class="infos">Informações da Pré-Defesa</strong></h3>
+              <div class="info-item">
+                <p><strong>Tema:  </strong> <span>{{ marcarPreDefesa.temaMonografia }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Status:</strong>
+                  <span class="status" [ngClass]="{
+                    'badge badge-success': marcarPreDefesa.status === 'APROVADO',
+                    'badge badge-warning': marcarPreDefesa.status === 'MARCADA',
+                    'badge badge-danger': marcarPreDefesa.status === 'CANCELADA'
+                  }">
+                    {{ marcarPreDefesa.status }}
+                  </span>
+                </p>
+              </div>
+              <div class="info-item">
+                <p><strong>Aluno:  </strong> <span>{{ marcarPreDefesa.alunoNomeCompleto }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Orientador:  </strong> <span>{{ marcarPreDefesa.orientadorNomeCompleto }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Campo de Estudo:  </strong> <span>{{ marcarPreDefesa.especialidadeNome }}</span></p>
+              </div>
+            </div>
+
+            <!-- Segunda Coluna: Detalhes adicionais -->
+            <div class="col-md-6">
+              <h3 class="mb-4"><strong class="infos">Detalhes Adicionais</strong></h3>
+              <div class="info-item">
+                <p><strong>Presidente:  </strong> <span>{{ marcarPreDefesa.presidenteNomeCompleto }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Vogal:  </strong> <span>{{ marcarPreDefesa.vogalNomeCompleto }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Data de Início:  </strong> <span>{{ marcarPreDefesa.dataInicio | date:'dd/MM/yyyy HH:mm' }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Data de Fim:  </strong> <span>{{ marcarPreDefesa.dataFim | date:'dd/MM/yyyy HH:mm' }}</span></p>
+              </div>
+              <div class="info-item">
+                <p><strong>Descrição:  </strong> <span>{{ marcarPreDefesa.descricao }}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,8 @@ import { MonografiaAllComponent } from "./monografia-all/monografia-all.componen
 import { DetalheAlunoComponent } from "./detalhe-aluno/detalhe-aluno.component";
 import { PerfilComponent } from "./perfil/perfil.component";
 import { PreDefesaComponent } from "./pre-defesa/pre-defesa.component";
+import { AllMarcarPreDefesaComponent } from "./all-marcar-pre-defesa/all-marcar-pre-defesa.component";
+import { DetalheMarcarPreDefesaComponent } from "./detalhe-marcar-pre-defesa/detalhe-marcar-pre-defesa.component";
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
@@ -34,8 +36,16 @@ export const ADMIN_ROUTES: Routes = [
         component: MonografiaAllComponent
       },
       {
+        path: 'calendario',
+        component: AllMarcarPreDefesaComponent
+      },
+      {
         path: 'detalhe-monografia/:id',
         component: DetalheAlunoComponent
+      },
+      {
+        path: 'detalhe-marcarPreDefesa/:id',
+        component: DetalheMarcarPreDefesaComponent
       },
       {
         path: 'perfil',

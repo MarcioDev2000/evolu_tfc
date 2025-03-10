@@ -98,7 +98,7 @@ export class PreDefesaComponent implements OnInit {
       }
     );
   }
-  // Método chamado ao submeter o formulário
+
   onSubmit(): void {
     if (this.preDefesaForm.invalid) {
       Swal.fire('Atenção', 'Preencha todos os campos obrigatórios.', 'warning');
@@ -116,13 +116,25 @@ export class PreDefesaComponent implements OnInit {
       formValue.descricao
     ).subscribe(
       (response) => {
-        Swal.fire('Sucesso', 'Pré-defesa criada com sucesso!', 'success');
-        this.router.navigate(['/pre-defesas']); // Redireciona para a lista de pré-defesas
+        Swal.fire('Sucesso', 'Pré-defesa criada com sucesso!', 'success').then(() => {
+          this.resetFormulario(); 
+          this.router.navigate(['/monografias']); 
+        });
       },
       (error) => {
         console.error('Erro ao criar pré-defesa:', error);
-        Swal.fire('Erro', 'Não foi possível criar a pré-defesa.', 'error');
+        Swal.fire('Erro', 'Não foi possível criar a pré-defesa.', 'error').then(() => {
+          this.resetFormulario(); 
+        });
       }
     );
+  }
+
+  resetFormulario(): void {
+    this.preDefesaForm.reset(); 
+    this.preDefesaForm.patchValue({
+      monografiaId: this.monografia.id, 
+      temaMonografia: this.monografia.tema, 
+    });
   }
 }

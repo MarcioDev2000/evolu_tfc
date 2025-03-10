@@ -74,4 +74,31 @@ export class PreDefesaService {
       })
     );
   }
+
+  listarPreDefesasPorStatus(status?: string): Observable<any[]> {
+    let params = new HttpParams();
+    if (status) {
+      params = params.set('status', status);
+    }
+
+    return this.http.get<any[]>(`${environment.API_URL}/pre-defesas`, { params }).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar pré-defesas:', error);
+        this.showMessage('Erro ao carregar pré-defesas.');
+        return throwError(error);
+      })
+    );
+  }
+
+  buscarPreDefesaPorId(id: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/pre-defesas/${id}`).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar pré-defesa por ID:', error);
+        this.showMessage('Erro ao carregar os detalhes da pré-defesa.');
+        return throwError(error);
+      })
+    );
+  }
+
+
 }

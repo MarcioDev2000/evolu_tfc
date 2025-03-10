@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MonografiaService } from 'src/app/shared/services/monografia.service';
 import { Router } from '@angular/router';
 
-// Interfaces para tipagem
 interface Especialidade {
   id: string;
   nome: string;

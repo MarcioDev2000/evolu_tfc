@@ -84,32 +84,33 @@ export class RegistarComponent implements OnInit {
 
   criarUser(UserForm: NgForm): void {
     const userData = { ...this.user };
-
-    // Remove o campo especialidade se o usuário for do tipo "aluno"
+  
+    // Remover campos não aplicáveis ao tipo de usuário selecionado
     if (this.selectedUserRole === TipoDeEntidade.aluno) {
-      userData.especialidade = null;
+      delete userData.especialidade;
     }
-
-    // Remove o campo matricula se o usuário for do tipo "orientador"
     if (this.selectedUserRole === TipoDeEntidade.orientador) {
-      userData.matricula = null;
+      delete userData.matricula;
     }
-
     this.userService.create(userData).subscribe(
       response => {
-        Swal.fire('Sucesso', 'Usuário registrado com sucesso!', 'success');
-        this.router.navigate(['/login']);
+        // Redireciona para /login apenas se a requisição for bem-sucedida
+        Swal.fire('Sucesso', 'Usuário registrado com sucesso!', 'success').then(() => {
+          this.router.navigate(['/login']);
+        });
       },
       error => {
-        if (error.error && error.error.email && error.error.email[0] === 'usuario with this email already exists.') {
-          this.openSnackBar('Erro', 'Já existe um usuário com este e-mail.', 'error');
+        if (error.status === 400) {
+         if (error.error?.email === 'Email inválido') {
+            this.openSnackBar('Erro', 'Email do usuario invalido.', 'error');
+          } 
         } else {
           Swal.fire('Erro', 'Ocorreu um erro ao criar o usuário.', 'error');
         }
       }
     );
   }
-
+  
   onRoleChange(idTipoUsuario: string, nome: string): void {
     if (idTipoUsuario) {
       this.user.tipoUsuario = idTipoUsuario;
