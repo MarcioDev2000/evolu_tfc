@@ -37,7 +37,7 @@ export class PreDefesaComponent implements OnInit {
 
   ngOnInit(): void {
     this.inicializarFormulario(); // Inicializa o formulário
-  
+
     // Captura o ID da monografia da rota
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -56,7 +56,6 @@ export class PreDefesaComponent implements OnInit {
       vogalId: ['', Validators.required], // ID do vogal
       dataInicio: ['', Validators.required], // Data de início
       dataFim: ['', Validators.required], // Data de fim
-      descricao: [''], // Descrição (opcional)
     });
   }
 
@@ -66,13 +65,13 @@ export class PreDefesaComponent implements OnInit {
         this.monografia = monografia;
         console.log('Monografia carregada:', monografia); // Verifica a monografia carregada
         console.log('Especialidade da monografia:', monografia.especialidade); // Verifica o objeto especialidade
-  
+
         this.preDefesaForm.patchValue({
           monografiaId: monografia.id, // Preenche o ID da monografia
           temaMonografia: monografia.tema, // Preenche o tema da monografia
           especialidadeId: monografia.especialidade.id // Preenche o ID da especialidade
         });
-  
+
         // Se a especialidade foi preenchida, carrega os orientadores
         if (monografia.especialidade && monografia.especialidade.id) {
           console.log('Carregando orientadores para a especialidade:', monografia.especialidade.id); // Verifica o ID da especialidade antes de carregar os orientadores
@@ -86,7 +85,7 @@ export class PreDefesaComponent implements OnInit {
       }
     );
   }
-  
+
   carregarOrientadoresPorEspecialidade(especialidadeId: string): void {
     this.preDefesaService.getOrientadoresPorEspecialidade(especialidadeId).subscribe(
       (orientadores) => {
@@ -104,37 +103,36 @@ export class PreDefesaComponent implements OnInit {
       Swal.fire('Atenção', 'Preencha todos os campos obrigatórios.', 'warning');
       return;
     }
-  
+
     const formValue = this.preDefesaForm.value;
-  
+
     this.preDefesaService.criarPreDefesa(
       formValue.monografiaId,
       formValue.presidenteId,
       formValue.vogalId,
       formValue.dataInicio,
       formValue.dataFim,
-      formValue.descricao
     ).subscribe(
       (response) => {
         Swal.fire('Sucesso', 'Pré-defesa criada com sucesso!', 'success').then(() => {
-          this.resetFormulario(); 
-          this.router.navigate(['/monografias']); 
+          this.resetFormulario();
+          this.router.navigate(['/admin/monografias']);
         });
       },
       (error) => {
         console.error('Erro ao criar pré-defesa:', error);
         Swal.fire('Erro', 'Não foi possível criar a pré-defesa.', 'error').then(() => {
-          this.resetFormulario(); 
+          this.resetFormulario();
         });
       }
     );
   }
 
   resetFormulario(): void {
-    this.preDefesaForm.reset(); 
+    this.preDefesaForm.reset();
     this.preDefesaForm.patchValue({
-      monografiaId: this.monografia.id, 
-      temaMonografia: this.monografia.tema, 
+      monografiaId: this.monografia.id,
+      temaMonografia: this.monografia.tema,
     });
   }
 }

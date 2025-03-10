@@ -15,12 +15,12 @@ import { catchError } from 'rxjs/operators';
 export class MonografiaAllComponent implements OnInit {
   monografias: any[] = [];
   monografiasFiltradas: any[] = [];
-  filtro: string = ''; 
+  filtro: string = '';
 
-  
+
   monografiaSelecionada: any;
-  novoStatus: string = ''; 
-  descricao: string = ''; 
+  novoStatus: string = '';
+  descricao: string = '';
 
   constructor(
     private monografiaService: MonografiaService,
