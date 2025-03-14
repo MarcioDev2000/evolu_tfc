@@ -24,7 +24,6 @@
             </div>
 
             <div class="row">
-
               <!-- Campo: Presidente -->
               <div class="col-md-6">
                 <div class="form-group">
@@ -35,39 +34,36 @@
                       {{ orientador.nomeCompleto }}
                     </option>
                   </select>
-                  <div
-                    *ngIf="preDefesaForm.get('presidenteId')?.invalid && preDefesaForm.get('presidenteId')?.touched"
-                    class="invalid-feedback"
-                    style="color: #fd5d93;"
-                  >
+                  <div *ngIf="preDefesaForm.get('presidenteId')?.invalid && preDefesaForm.get('presidenteId')?.touched" class="invalid-feedback" style="color: #fd5d93;">
                     O presidente é obrigatório.
+                  </div>
+                  <div *ngIf="preDefesaForm.get('presidenteId')?.value === monografia.orientador.id" class="invalid-feedback" style="color: #fd5d93;">
+                    O orientador da monografia não pode ser o presidente.
                   </div>
                 </div>
               </div>
 
+              <!-- Campo: Vogal -->
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Vogal</label>
                   <select class="form-control" formControlName="vogalId" required>
                     <option value="" disabled selected>Selecione um vogal</option>
-                    <option *ngFor="let orientador of orientadores" [value]="orientador.id">
+                    <option *ngFor="let orientador of orientadoresDisponiveis" [value]="orientador.id">
                       {{ orientador.nomeCompleto }}
                     </option>
                   </select>
-                  <div
-                    *ngIf="preDefesaForm.get('vogalId')?.invalid && preDefesaForm.get('vogalId')?.touched"
-                    class="invalid-feedback"
-                    style="color: #fd5d93;"
-                  >
+                  <div *ngIf="preDefesaForm.get('vogalId')?.invalid && preDefesaForm.get('vogalId')?.touched" class="invalid-feedback" style="color: #fd5d93;">
                     O vogal é obrigatório.
+                  </div>
+                  <div *ngIf="preDefesaForm.get('vogalId')?.value === monografia.orientador.id" class="invalid-feedback" style="color: #fd5d93;">
+                    O orientador da monografia não pode ser o vogal.
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <!-- Campo: Vogal -->
-
               <!-- Campo: Data de Início -->
               <div class="col-md-6">
                 <div class="form-group">
@@ -83,11 +79,17 @@
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    A data de início é obrigatória.
+                    <div *ngIf="preDefesaForm.get('dataInicio')?.errors?.['required']">
+                      A data de início é obrigatória.
+                    </div>
+                    <div *ngIf="preDefesaForm.get('dataInicio')?.errors?.['dataInvalida']">
+                      A data de início da pré-defesa deve ser futura.
+                    </div>
                   </div>
                 </div>
               </div>
 
+              <!-- Campo: Data de Fim -->
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Data de Fim</label>
@@ -102,7 +104,12 @@
                     class="invalid-feedback"
                     style="color: #fd5d93;"
                   >
-                    A data de fim é obrigatória.
+                    <div *ngIf="preDefesaForm.get('dataFim')?.errors?.['required']">
+                      A data de fim é obrigatória.
+                    </div>
+                    <div *ngIf="preDefesaForm.errors?.['dataFimInvalida']">
+                      A data de término da pré-defesa deve ser posterior à data de início.
+                    </div>
                   </div>
                 </div>
               </div>

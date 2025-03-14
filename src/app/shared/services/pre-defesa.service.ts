@@ -25,6 +25,16 @@ export class PreDefesaService {
     });
   }
 
+  listarPreDefesasPorUsuario(usuarioId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.API_URL}/pre-defesas/usuario/${usuarioId}`).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar pré-defesas do usuário:', error);
+        this.showMessage('Erro ao carregar pré-defesas do usuário.');
+        return throwError(error);
+      })
+    );
+  }
+
   getEspecialidades(): Observable<any> {
     return this.http.get<any>(`${environment.API_URL}/especialidades/`).pipe(
       catchError((error) => {

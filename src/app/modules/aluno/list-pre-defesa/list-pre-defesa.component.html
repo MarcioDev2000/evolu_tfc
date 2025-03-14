@@ -1,0 +1,87 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading" class="text-center mt-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Carregando...</span>
+        </div>
+        <p class="mt-2">Carregando pré-defesas...</p>
+      </div>
+
+      <!-- Pre-Defense List -->
+      <div *ngIf="!isLoading">
+        <!-- Verifica se há pré-defesas -->
+        <div *ngIf="preDefesas.length > 0; else noPreDefesas">
+          <div *ngFor="let preDefesa of preDefesas" class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+              <h3 class="title mb-0">Pré-Defesa de {{ preDefesa.alunoNomeCompleto }}</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <!-- First Column: Main Information -->
+                <div class="col-md-6">
+                  <h3 class="mb-4"><strong class="infos">Informações da Pré-Defesa</strong></h3>
+                  <div class="info-item">
+                    <p><strong>Tema:</strong> {{ preDefesa.temaMonografia }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Status:</strong>
+                      <span class="badge" [ngClass]="{
+                        'badge-success': preDefesa.status === 'APROVADO',
+                        'badge-warning': preDefesa.status === 'MARCADA',
+                        'badge-danger': preDefesa.status === 'CANCELADA'
+                      }">
+                        {{ preDefesa.status }}
+                      </span>
+                    </p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Aluno:</strong> {{ preDefesa.alunoNomeCompleto }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Orientador:</strong> {{ preDefesa.orientadorNomeCompleto }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Campo de Estudo:</strong> {{ preDefesa.especialidadeNome }}</p>
+                  </div>
+                </div>
+
+                <!-- Second Column: Additional Details -->
+                <div class="col-md-6">
+                  <h3 class="mb-4"><strong class="infos">Detalhes Adicionais</strong></h3>
+                  <div class="info-item">
+                    <p><strong>Presidente:</strong> {{ preDefesa.presidenteNomeCompleto }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Vogal:</strong> {{ preDefesa.vogalNomeCompleto }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Data de Início:</strong> {{ preDefesa.dataInicio | date:'dd/MM/yyyy HH:mm' }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Data de Fim:</strong> {{ preDefesa.dataFim | date:'dd/MM/yyyy HH:mm' }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p><strong>Descrição:</strong> {{ preDefesa.descricao }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensagem quando não há pré-defesas -->
+        <ng-template #noPreDefesas>
+          <div class="card shadow-sm">
+            <div class="card-body text-center text-muted py-5">
+              <i class="fas fa-calendar-times fa-3x mb-3" style="color: white;"></i>
+              <h4 class="card-title">Nenhuma Marcação de Pré-Defesa Marcada</h4>
+              <p class="card-text" style="color: white;">Não há pré-defesas agendadas no momento.</p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

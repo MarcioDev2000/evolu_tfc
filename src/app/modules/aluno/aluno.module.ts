@@ -18,6 +18,7 @@ import { VerMonografiaComponent } from './ver-monografia/ver-monografia.componen
 import { AtualizarMonografiaComponent } from './atualizar-monografia/atualizar-monografia.component';
 import { DetalheMonografiaComponent } from './detalhe-monografia/detalhe-monografia.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { ListPreDefesaComponent } from './list-pre-defesa/list-pre-defesa.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     VerMonografiaComponent,
     AtualizarMonografiaComponent,
     DetalheMonografiaComponent,
-    PerfilComponent
+    PerfilComponent,
+    ListPreDefesaComponent
   ],
   imports: [
     CommonModule,

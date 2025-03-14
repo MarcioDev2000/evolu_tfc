@@ -16,6 +16,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { GestaoAlunosComponent } from './gestao-alunos/gestao-alunos.component';
 import { DetalhesAlunosComponent } from './detalhes-alunos/detalhes-alunos.component';
+import { ListPreDefesaComponent } from './list-pre-defesa/list-pre-defesa.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DetalhesAlunosComponent } from './detalhes-alunos/detalhes-alunos.compo
     PerfilComponent,
     VerMonografiaComponent,
     GestaoAlunosComponent,
-    DetalhesAlunosComponent
+    DetalhesAlunosComponent,
+    ListPreDefesaComponent
   ],
   imports: [
     CommonModule,

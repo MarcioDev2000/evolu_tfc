@@ -1,0 +1,32 @@
+/* Estilos para o card de mensagem */
+.card {
+  border: none;
+  border-radius: 10px;
+  background-color: #c29125;; /* Fundo claro */
+  transition: transform 0.2s;
+}
+
+
+.card:hover {
+  transform: translateY(-5px); /* Efeito de hover */
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6c757d; /* Cor cinza escuro */
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d; /* Cor cinza escuro */
+}
+
+/* Estilos para o ícone */
+.fa-calendar-times {
+  color: #6c757d; /* Cor cinza escuro */
+}

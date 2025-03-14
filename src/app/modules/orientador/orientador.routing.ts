@@ -5,6 +5,7 @@ import { VerMonografiaComponent } from "./ver-monografia/ver-monografia.componen
 import { GestaoAlunosComponent } from "./gestao-alunos/gestao-alunos.component";
 import { DetalhesAlunosComponent } from "./detalhes-alunos/detalhes-alunos.component";
 import { PerfilComponent } from "./perfil/perfil.component";
+import { ListPreDefesaComponent } from "./list-pre-defesa/list-pre-defesa.component";
 
 
 export const ORIENTADOR_ROUTES: Routes = [
@@ -37,6 +38,10 @@ export const ORIENTADOR_ROUTES: Routes = [
       {
         path: 'perfil',
         component: PerfilComponent
+      },
+      {
+        path: 'calendario',
+        component: ListPreDefesaComponent
       },
     ]
   }
