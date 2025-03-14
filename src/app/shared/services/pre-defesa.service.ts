@@ -35,6 +35,17 @@ export class PreDefesaService {
     );
   }
 
+  listarTodasPreDefesas(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.API_URL}/pre-defesas/admin`).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar todas as pré-defesas:', error);
+        this.showMessage('Erro ao carregar todas as pré-defesas.');
+        return throwError(error);
+      })
+    );
+  }
+
+
   getEspecialidades(): Observable<any> {
     return this.http.get<any>(`${environment.API_URL}/especialidades/`).pipe(
       catchError((error) => {
