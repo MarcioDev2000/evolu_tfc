@@ -45,7 +45,7 @@ export class PreDefesaComponent implements OnInit {
       this.carregarMonografia(id);
     } else {
       Swal.fire('Erro', 'ID da monografia não encontrado.', 'error');
-      this.router.navigate(['/admin/monografias']);
+      this.router.navigate(['/admin/calendario']);
     }
 
     // Listener para mudanças no campo presidenteId

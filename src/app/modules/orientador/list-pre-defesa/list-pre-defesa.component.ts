@@ -61,7 +61,7 @@ export class ListPreDefesaComponent implements OnInit {
   }
 
   // Redireciona para a página de edição da pré-defesa
-  editarPreDefesa(preDefesaId: string): void {
+  AddPreDefesa(preDefesaId: string): void {
     this.router.navigate(['/pre-defesas/editar', preDefesaId]);
   }
 
