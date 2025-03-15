@@ -1,0 +1,77 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <!-- Cabeçalho do Card -->
+        <div class="card-header bg-primary text-white">
+          <h3 class="title mb-0">Gestão de Usuários Inativos</h3>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="col-md-4 pr-md-1">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Filtrar usuários..."
+                [(ngModel)]="filtro"
+                (input)="aplicarFiltro()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Corpo do Card -->
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th>Nome</th>
+                  <th>Sobrenome</th>
+                  <th>Endereço</th>
+                  <th>Telefone</th>
+                  <th>Email</th>
+                  <th>NIF</th>
+                  <th>Matrícula</th>
+                  <th>Tipo de Usuário</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of usersFiltrados">
+                  <td>{{ user.nome }}</td>
+                  <td>{{ user.sobrenome }}</td>
+                  <td>{{ user.endereco }}</td>
+                  <td>{{ user.telefone }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>{{ user.nif }}</td>
+                  <td>{{ user.matricula }}</td>
+                  <td>{{ user.tipoUsuario }}</td>
+                  <td>{{ user.status === 'Ativo' ? 'Ativo' : 'Inativo' }}</td>
+                  <td>
+                    <button
+                      class="btn btn-sm btn-danger"
+                      (click)="atualizarStatus(user.id, 'Ativo')"
+                      *ngIf="user.status === 'Inativo'">
+                      Ativar
+                    </button>
+                    <button
+                      class="btn btn-sm btn-danger"
+                      (click)="atualizarStatus(user.id, 'Inativo')"
+                      *ngIf="user.status === 'Ativo'">
+                      Desativar
+                    </button>
+                  </td>
+
+                </tr>
+                <tr *ngIf="usersFiltrados.length === 0">
+                  <td colspan="10" class="text-center text-muted py-4">
+                    <i class="fas fa-exclamation-circle"></i> Nenhum usuário encontrado.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

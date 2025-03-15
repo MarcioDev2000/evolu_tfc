@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -82,6 +82,27 @@ export class UserService {
     return this.http.get<any>(`${environment.API_URL}/menus/?id_do_usuario=` + id);
   }
 
+  atualizarStatusUsuario(id: string, status: boolean): Observable<any> {
+    const params = new HttpParams().set('status', status.toString()); // Converte boolean para string
+
+    return this.http.patch(`${environment.API_URL}/usuarios/${id}/status`, {}, { params }).pipe(
+      catchError(error => {
+        console.error('Erro ao atualizar status do usuário:', error);
+        this.showMessage('Erro ao atualizar status do usuário.');
+        return throwError(error);
+      })
+    );
+  }
+
+  listarUsuariosInativos(adminId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/usuarios/inativos?adminId=${adminId}`).pipe(
+      catchError(error => {
+        console.error('Erro ao listar usuários inativos:', error);
+        this.showMessage('Erro ao carregar usuários inativos.');
+        return throwError(error);
+      })
+    );
+  }
 
   getTipoUsuarios(): Observable<TipoUsuario[]> {
     return this.http.get<TipoUsuario[]>(`${environment.API_URL}/tipos-usuario/`);

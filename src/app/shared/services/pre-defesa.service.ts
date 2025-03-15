@@ -34,7 +34,6 @@ export class PreDefesaService {
       })
     );
   }
-
   listarTodasPreDefesas(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.API_URL}/pre-defesas/admin`).pipe(
       catchError((error) => {

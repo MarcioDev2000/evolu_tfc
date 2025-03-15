@@ -9,4 +9,5 @@ export interface User {
   tipoUsuario: string;
   matricula?: string | null;
   especialidade?: string | null;
+  status?: boolean;
 }

@@ -41,7 +41,8 @@ export class RegistarComponent implements OnInit {
     nif: '',
     tipoUsuario: '',
     matricula:'',
-    especialidade: ''
+    especialidade: '',
+    status: false
   };
 
   constructor(private userService: UserService, private router: Router, private snackBar: MatSnackBar) {}
@@ -84,7 +85,7 @@ export class RegistarComponent implements OnInit {
 
   criarUser(UserForm: NgForm): void {
     const userData = { ...this.user };
-  
+
     // Remover campos não aplicáveis ao tipo de usuário selecionado
     if (this.selectedUserRole === TipoDeEntidade.aluno) {
       delete userData.especialidade;
@@ -103,14 +104,14 @@ export class RegistarComponent implements OnInit {
         if (error.status === 400) {
          if (error.error?.email === 'Email inválido') {
             this.openSnackBar('Erro', 'Email do usuario invalido.', 'error');
-          } 
+          }
         } else {
           Swal.fire('Erro', 'Ocorreu um erro ao criar o usuário.', 'error');
         }
       }
     );
   }
-  
+
   onRoleChange(idTipoUsuario: string, nome: string): void {
     if (idTipoUsuario) {
       this.user.tipoUsuario = idTipoUsuario;

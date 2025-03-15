@@ -20,6 +20,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { PreDefesaComponent } from './pre-defesa/pre-defesa.component';
 import { DetalheMarcarPreDefesaComponent } from './detalhe-marcar-pre-defesa/detalhe-marcar-pre-defesa.component';
 import { ListPredefesaComponent } from './list-predefesa/list-predefesa.component';
+import { ListUsersComponent } from './list-users/list-users.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ListPredefesaComponent } from './list-predefesa/list-predefesa.componen
     PerfilComponent,
     PreDefesaComponent,
     DetalheMarcarPreDefesaComponent,
-    ListPredefesaComponent
+    ListPredefesaComponent,
+    ListUsersComponent
   ],
   imports: [
     CommonModule,

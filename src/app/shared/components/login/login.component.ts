@@ -40,29 +40,29 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (!this.user.email || !this.user.password) {
-      Swal.fire('Erro', 'Email e senha são campos obrigatórios.', 'error');
-      return;
+        Swal.fire('Erro', 'Email e senha são campos obrigatórios.', 'error');
+        return;
     }
-  
+
     this.userService.login(this.user).pipe(
-      catchError((error) => {
-        if (error.status === 401 && error.error.message === "Credenciais inválidas") {
-          this.openSnackBar('Erro', 'Senha incorreta. Verifique e tente novamente.', 'error');
-        } else if (error.error.email) {
-          this.openSnackBar('Erro', 'E-mail incorreto. Verifique e tente novamente.', 'error');
-        } else {
-          this.openSnackBar('Erro', 'Ocorreu um erro ao tentar fazer login. Tente novamente.', 'error');
-        }
-        return throwError(error); // Reenvia o erro para o fluxo de observáveis
-      })
+        catchError((error) => {
+            if (error.status === 401 && error.error.message === "Credenciais inválidas") {
+                this.openSnackBar('Erro', 'Senha incorreta. Verifique e tente novamente.', 'error');
+            } else if (error.status === 403 && error.error.message === "Sua conta ainda não foi ativada. Entre em contato com o administrador.") {
+                this.openSnackBar('Erro', 'Sua conta ainda não foi ativada. Entre em contato com o administrador.', 'error');
+            } else {
+                this.openSnackBar('Erro', 'Ocorreu um erro ao tentar fazer login. Tente novamente.', 'error');
+            }
+            return throwError(error); 
+        })
     ).subscribe(response => {
-      // Armazenar dados no localStorage
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response));
-      localStorage.setItem('tipo_de_entidade_id', response.tipo_de_entidade_id);
-      this.redirectToUserPage(response);
+        // Armazenar dados no localStorage
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response));
+        localStorage.setItem('tipo_de_entidade_id', response.tipo_de_entidade_id);
+        this.redirectToUserPage(response);
     });
-  }
+}
 
   private redirectToUserPage(userData: any): void {
     this.router.navigate([userData.rota]);
