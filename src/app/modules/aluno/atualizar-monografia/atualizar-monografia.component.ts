@@ -9,6 +9,11 @@ interface Especialidade {
   nome: string;
 }
 
+interface Curso {
+  id: string;
+  nome: string;
+}
+
 interface Orientador {
   id: string;
   nomeCompleto: string;
@@ -22,6 +27,7 @@ interface Orientador {
 export class AtualizarMonografiaComponent implements OnInit {
   especialidades: Especialidade[] = [];
   orientadores: Orientador[] = [];
+  cursos: Curso[] = [];
   monografiaForm!: FormGroup;
   monografiaId!: string;
 
@@ -35,7 +41,7 @@ export class AtualizarMonografiaComponent implements OnInit {
   ngOnInit(): void {
     this.monografiaId = this.route.snapshot.params['id'];
     this.inicializarFormulario();
-    this.carregarEspecialidades();
+    this.carregarCursos();
     this.setAlunoId();
     this.carregarDadosMonografia();
   }
@@ -43,6 +49,7 @@ export class AtualizarMonografiaComponent implements OnInit {
   inicializarFormulario(): void {
     this.monografiaForm = this.formBuilder.group({
       tema: ['', [Validators.required, Validators.maxLength(200)]],
+      cursoId: ['', Validators.required],
       especialidadeId: ['', Validators.required],
       orientadorId: ['', Validators.required],
       extratoBancario: [null, this.validateFileType(['pdf', 'jpeg', 'png'])],
@@ -96,37 +103,48 @@ export class AtualizarMonografiaComponent implements OnInit {
   }
 
 
-  // Carrega a lista de especialidades
-  carregarEspecialidades(): void {
-    this.monografiaService.getEspecialidades().subscribe(
-      (data: Especialidade[]) => {
-        this.especialidades = data;
+  // Carrega a lista de cursos
+  carregarCursos(): void {
+    this.monografiaService.getCursos().subscribe(
+      (data: Curso[]) => {
+        this.cursos = data;
       },
       (error) => {
-        this.handleError('Erro ao carregar especialidades:', error);
+        this.handleError('Erro ao carregar cursos:', error);
       }
     );
   }
 
-  carregarOrientadores(especialidadeId: string): void {
-    this.monografiaService.getOrientadoresPorEspecialidade(especialidadeId).subscribe(
-      (data: Orientador[]) => {
-        console.log('Orientadores carregados:', data); // Verifique se os dados estão corretos
-        this.orientadores = data;
-      },
-      (error) => {
-        this.handleError('Erro ao carregar orientadores:', error);
-      }
-    );
+  // Carrega as especialidades quando um curso é selecionado
+  onCursoSelecionado(event: any): void {
+    const cursoId = event.target.value;
+    if (cursoId) {
+      this.monografiaService.getEspecialidadesPorCurso(cursoId).subscribe(
+        (data: Especialidade[]) => {
+          this.especialidades = data;
+          this.monografiaForm.get('especialidadeId')?.reset(); // Reseta o campo de especialidade
+          this.monografiaForm.get('orientadorId')?.reset(); // Reseta o campo de orientador
+        },
+        (error) => {
+          this.handleError('Erro ao carregar especialidades:', error);
+        }
+      );
+    }
   }
 
-
-
-  // Método chamado quando o usuário seleciona uma especialidade
+  // Carrega os orientadores quando uma especialidade é selecionada
   onEspecialidadeSelecionada(event: any): void {
     const especialidadeId = event.target.value;
     if (especialidadeId) {
-      this.carregarOrientadores(especialidadeId);
+      this.monografiaService.getOrientadoresPorEspecialidade(especialidadeId).subscribe(
+        (data: Orientador[]) => {
+          this.orientadores = data;
+          this.monografiaForm.get('orientadorId')?.reset(); // Reseta o campo de orientador
+        },
+        (error) => {
+          this.handleError('Erro ao carregar orientadores:', error);
+        }
+      );
     }
   }
 

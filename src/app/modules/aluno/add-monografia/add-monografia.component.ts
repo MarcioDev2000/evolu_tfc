@@ -9,6 +9,11 @@ interface Especialidade {
   nome: string;
 }
 
+interface Curso {
+  id: string;
+  nome: string;
+}
+
 interface Orientador {
   id: string;
   nomeCompleto: string;
@@ -21,6 +26,7 @@ interface Orientador {
 })
 export class AddMonografiaComponent implements OnInit {
   especialidades: Especialidade[] = [];
+  cursos: Curso[] = [];
   orientadores: Orientador[] = [];
   monografiaForm!: FormGroup;
 
@@ -32,7 +38,7 @@ export class AddMonografiaComponent implements OnInit {
 
   ngOnInit(): void {
     this.inicializarFormulario();
-    this.carregarEspecialidades();
+    this.carregarCursos();
     this.setAlunoId();
   }
 
@@ -40,6 +46,7 @@ export class AddMonografiaComponent implements OnInit {
   inicializarFormulario(): void {
     this.monografiaForm = this.formBuilder.group({
       tema: ['', [Validators.required, Validators.maxLength(200)]],
+      cursoId: ['', Validators.required], // Novo campo
       especialidadeId: ['', Validators.required],
       orientadorId: ['', Validators.required],
       extratoBancario: [null, [Validators.required, this.validateFileType(['pdf', 'jpeg', 'png'])]],
@@ -78,36 +85,48 @@ export class AddMonografiaComponent implements OnInit {
     }
   }
 
-  // Carrega a lista de especialidades
-  carregarEspecialidades(): void {
-    this.monografiaService.getEspecialidades().subscribe(
-      (data: Especialidade[]) => {
-        this.especialidades = data;
+  // Carrega a lista de cursos
+  carregarCursos(): void {
+    this.monografiaService.getCursos().subscribe(
+      (data: Curso[]) => {
+        this.cursos = data;
       },
       (error) => {
-        this.handleError('Erro ao carregar especialidades:', error);
+        this.handleError('Erro ao carregar cursos:', error);
       }
     );
   }
 
-  carregarOrientadores(especialidadeId: string): void {
-    this.monografiaService.getOrientadoresPorEspecialidade(especialidadeId).subscribe(
-      (data: Orientador[]) => {
-        console.log('Orientadores carregados:', data); // 👈 Verificar se os orientadores estão sendo carregados
-        this.orientadores = data;
-      },
-      (error) => {
-        this.handleError('Erro ao carregar orientadores:', error);
-      }
-    );
+  // Carrega as especialidades quando um curso é selecionado
+  onCursoSelecionado(event: any): void {
+    const cursoId = event.target.value;
+    if (cursoId) {
+      this.monografiaService.getEspecialidadesPorCurso(cursoId).subscribe(
+        (data: Especialidade[]) => {
+          this.especialidades = data;
+          this.monografiaForm.get('especialidadeId')?.reset(); // Reseta o campo de especialidade
+          this.monografiaForm.get('orientadorId')?.reset(); // Reseta o campo de orientador
+        },
+        (error) => {
+          this.handleError('Erro ao carregar especialidades:', error);
+        }
+      );
+    }
   }
 
-
-  // Método chamado quando o usuário seleciona uma especialidade
+  // Carrega os orientadores quando uma especialidade é selecionada
   onEspecialidadeSelecionada(event: any): void {
     const especialidadeId = event.target.value;
     if (especialidadeId) {
-      this.carregarOrientadores(especialidadeId);
+      this.monografiaService.getOrientadoresPorEspecialidade(especialidadeId).subscribe(
+        (data: Orientador[]) => {
+          this.orientadores = data;
+          this.monografiaForm.get('orientadorId')?.reset(); // Reseta o campo de orientador
+        },
+        (error) => {
+          this.handleError('Erro ao carregar orientadores:', error);
+        }
+      );
     }
   }
 
@@ -126,16 +145,11 @@ export class AddMonografiaComponent implements OnInit {
       return;
     }
 
-    const orientadorId = this.monografiaForm.get('orientadorId')?.value;
-    if (!orientadorId) {
-      Swal.fire('Erro', 'Selecione um orientador.', 'error');
-      return;
-    }
-
     const formData = new FormData();
     formData.append('tema', this.monografiaForm.get('tema')?.value);
+    formData.append('cursoId', this.monografiaForm.get('cursoId')?.value); // Adiciona o cursoId
     formData.append('especialidadeId', this.monografiaForm.get('especialidadeId')?.value);
-    formData.append('orientadorId', orientadorId);
+    formData.append('orientadorId', this.monografiaForm.get('orientadorId')?.value);
     formData.append('extratoBancario', this.monografiaForm.get('extratoBancario')?.value);
     formData.append('declaracaoNotas', this.monografiaForm.get('declaracaoNotas')?.value);
     formData.append('termoOrientador', this.monografiaForm.get('termoOrientador')?.value);
@@ -150,7 +164,8 @@ export class AddMonografiaComponent implements OnInit {
           this.monografiaForm.reset();
           this.router.navigate(['/aluno/inscricao-monografia']);
         });
-      },(error) => {
+      },
+      (error) => {
         if (error.status === 500 && error.error.message.includes("O aluno já possui uma monografia cadastrada")) {
           Swal.fire('Aviso', 'Você já possui uma monografia cadastrada e não pode inscrever-se novamente.', 'warning');
           this.monografiaForm.reset();

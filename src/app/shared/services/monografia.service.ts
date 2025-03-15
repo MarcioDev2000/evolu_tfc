@@ -25,6 +25,26 @@ export class MonografiaService {
     });
   }
 
+  // Obtém a lista de cursos
+getCursos(): Observable<any[]> {
+  return this.http.get<any[]>(`${environment.API_URL}/monografias/cursos`).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar cursos:', error);
+      return throwError(error);
+    })
+  );
+}
+
+// Obtém a lista de especialidades por curso
+getEspecialidadesPorCurso(cursoId: string): Observable<any[]> {
+  return this.http.get<any[]>(`${environment.API_URL}/monografias/cursos/${cursoId}/especialidades`).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar especialidades:', error);
+      return throwError(error);
+    })
+  );
+}
+
   // Obtém a lista de especialidades
   getEspecialidades(): Observable<any> {
     return this.http.get<any>(`${environment.API_URL}/especialidades/`).pipe(
@@ -156,7 +176,7 @@ getMonografiaByAlunoId(alunoId: string): Observable<any> {
   // Lista monografias aprovadas para revisão do admin
   getMonografiasAprovadasPorAdmin(adminId: string): Observable<any> {
     const params = new HttpParams().set('adminId', adminId);
-  
+
     return this.http
       .get<any>(`${environment.API_URL}/monografias/aprovadas`, { params })
       .pipe(
@@ -167,7 +187,7 @@ getMonografiaByAlunoId(alunoId: string): Observable<any> {
         })
       );
   }
-  
+
 
   // Baixar ou visualizar documentos da monografia
   getDocumento(

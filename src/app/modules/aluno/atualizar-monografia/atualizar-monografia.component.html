@@ -31,6 +31,31 @@
             </div>
 
             <div class="row">
+              <!-- Campo: Curso -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Curso</label>
+                  <select
+                    class="form-control"
+                    formControlName="cursoId"
+                    (change)="onCursoSelecionado($event)"
+                    required
+                  >
+                    <option value="" disabled selected>Selecione um curso</option>
+                    <option *ngFor="let curso of cursos" [value]="curso.id">
+                      {{ curso.nome }}
+                    </option>
+                  </select>
+                  <div
+                    *ngIf="monografiaForm.get('cursoId')?.invalid && monografiaForm.get('cursoId')?.touched"
+                    class="invalid-feedback"
+                    style="color: #fd5d93;"
+                  >
+                    O curso é obrigatório.
+                  </div>
+                </div>
+              </div>
+
               <!-- Campo: Especialidade -->
               <div class="col-md-6">
                 <div class="form-group">
@@ -55,9 +80,11 @@
                   </div>
                 </div>
               </div>
+            </div>
 
+            <div class="row">
               <!-- Campo: Orientador -->
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label>Orientador</label>
                   <select class="form-control" formControlName="orientadorId" required>
