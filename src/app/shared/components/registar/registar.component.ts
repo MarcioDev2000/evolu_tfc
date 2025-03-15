@@ -18,6 +18,16 @@ interface Especialidade {
   nome: string;
 }
 
+interface CursoDTO {
+  id: string;
+  nome: string;
+}
+
+interface EspecialidadeDTO {
+  id: string;
+  nome: string;
+}
+
 @Component({
   selector: 'app-registar',
   templateUrl: './registar.component.html',
@@ -28,8 +38,10 @@ export class RegistarComponent implements OnInit {
   TipoDeEntidade = TipoDeEntidade; // Adicione esta linha para usar o enum no template
   selectedUserRole: string = '';
   tipoUsuarios: TipoUsuario[] = []; // Lista de tipos de usuário
-  especialidades: Especialidade[] = []; // Lista de especialidades
   tipoUsuarioSelecionado: boolean = false;
+  cursos: CursoDTO[] = []; // Lista de cursos
+  especialidades: EspecialidadeDTO[] = []; // Lista de especialidades
+  cursoSelecionado: string | null = null; // Curso selecionado
 
   user: User = {
     nome: '',
@@ -49,7 +61,7 @@ export class RegistarComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarTiposUsuario();
-    this.carregarEspecialidades();
+    this.carregarCursos();
   }
 
   carregarTiposUsuario(): void {
@@ -64,16 +76,36 @@ export class RegistarComponent implements OnInit {
       }
     );
   }
-  carregarEspecialidades(): void {
-    this.userService.getEspecialidades().subscribe(
-      (especialidades: Especialidade[]) => {
-        this.especialidades = especialidades;
-      },
-      error => {
-        console.error('Erro ao carregar especialidades:', error);
-      }
+
+  carregarCursos(): void {
+    this.userService.listarTodosCursos().subscribe(
+        (cursos: CursoDTO[]) => {
+            this.cursos = cursos;
+        },
+        error => {
+            console.error('Erro ao carregar cursos:', error);
+        }
     );
-  }
+}
+
+onCursoChange(cursoId: string): void {
+    this.cursoSelecionado = cursoId;
+    if (this.selectedUserRole === TipoDeEntidade.orientador) {
+        this.carregarEspecialidadesPorCurso(cursoId);
+    }
+}
+
+carregarEspecialidadesPorCurso(cursoId: string): void {
+    this.userService.listarEspecialidadesPorCurso(cursoId).subscribe(
+        (especialidades: EspecialidadeDTO[]) => {
+            this.especialidades = especialidades;
+        },
+        error => {
+            console.error('Erro ao carregar especialidades:', error);
+        }
+    );
+}
+
   openSnackBar(title: string, message: string, panelClass: string): void {
     this.snackBar.open(message, title, {
       duration: 5000,
@@ -84,53 +116,58 @@ export class RegistarComponent implements OnInit {
   }
 
   criarUser(UserForm: NgForm): void {
-    const userData = { ...this.user };
+    if (!this.cursoSelecionado) {
+        this.openSnackBar('Erro', 'Selecione um curso.', 'error');
+        return;
+    }
 
-    // Remover campos não aplicáveis ao tipo de usuário selecionado
+    const userData = { ...this.user, cursoId: this.cursoSelecionado };
+
     if (this.selectedUserRole === TipoDeEntidade.aluno) {
-      delete userData.especialidade;
+        delete userData.especialidade;
     }
     if (this.selectedUserRole === TipoDeEntidade.orientador) {
-      delete userData.matricula;
+        delete userData.matricula;
     }
+
     this.userService.create(userData).subscribe(
-      response => {
-        // Redireciona para /login apenas se a requisição for bem-sucedida
-        Swal.fire('Sucesso', 'Usuário registrado com sucesso!', 'success').then(() => {
-          this.router.navigate(['/login']);
-        });
-      },
-      error => {
-        if (error.status === 400) {
-         if (error.error?.email === 'Email inválido') {
-            this.openSnackBar('Erro', 'Email do usuario invalido.', 'error');
-          }
-        } else {
-          Swal.fire('Erro', 'Ocorreu um erro ao criar o usuário.', 'error');
+        response => {
+            Swal.fire('Sucesso', 'Usuário registrado com sucesso!', 'success').then(() => {
+                this.router.navigate(['/login']);
+            });
+        },
+        error => {
+            if (error.status === 400) {
+                if (error.error?.email === 'Email inválido') {
+                    this.openSnackBar('Erro', 'Email do usuário inválido.', 'error');
+                }
+            } else {
+                Swal.fire('Erro', 'Ocorreu um erro ao criar o usuário.', 'error');
+            }
         }
-      }
     );
-  }
+}
 
-  onRoleChange(idTipoUsuario: string, nome: string): void {
+onRoleChange(idTipoUsuario: string, nome: string): void {
     if (idTipoUsuario) {
-      this.user.tipoUsuario = idTipoUsuario;
-      this.selectedUserRole = nome;
-      this.tipoUsuarioSelecionado = true;
+        this.user.tipoUsuario = idTipoUsuario;
+        this.selectedUserRole = nome;
+        this.tipoUsuarioSelecionado = true;
     } else {
-      console.error('ID do tipo de usuário é inválido.');
+        console.error('ID do tipo de usuário é inválido.');
     }
-  }
+}
 
-  camposPreenchidos(): boolean {
-    const camposBasicos = !!this.user.email && !!this.user.password && !!this.user.nome && !!this.user.sobrenome && !!this.user.nif && !!this.user.telefone && this.tipoUsuarioSelecionado;
+camposPreenchidos(): boolean {
+    const camposBasicos = !!this.user.email && !!this.user.password && !!this.user.nome && !!this.user.sobrenome && !!this.user.nif && !!this.user.telefone && this.tipoUsuarioSelecionado && !!this.cursoSelecionado;
 
     if (this.selectedUserRole === TipoDeEntidade.aluno) {
-      return camposBasicos && !!this.user.matricula;
+        return camposBasicos && !!this.user.matricula;
     } else if (this.selectedUserRole === TipoDeEntidade.orientador) {
-      return camposBasicos && !!this.user.especialidade;
+        return camposBasicos && !!this.user.especialidade;
     }
 
     return camposBasicos;
-  }
 }
+}
+

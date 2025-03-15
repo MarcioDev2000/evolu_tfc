@@ -94,6 +94,26 @@ export class UserService {
     );
   }
 
+  listarTodosCursos(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.API_URL}/usuarios/cursos`).pipe(
+        catchError(error => {
+            console.error('Erro ao carregar cursos:', error);
+            this.showMessage('Erro ao carregar cursos.');
+            return throwError(error);
+        })
+    );
+}
+
+listarEspecialidadesPorCurso(cursoId: string): Observable<any[]> {
+  return this.http.get<any[]>(`${environment.API_URL}/usuarios/cursos/${cursoId}/especialidades`).pipe(
+      catchError(error => {
+          console.error('Erro ao carregar especialidades:', error);
+          this.showMessage('Erro ao carregar especialidades.');
+          return throwError(error);
+      })
+  );
+}
+
   listarUsuariosInativos(adminId: string): Observable<any> {
     return this.http.get<any>(`${environment.API_URL}/usuarios/inativos?adminId=${adminId}`).pipe(
       catchError(error => {

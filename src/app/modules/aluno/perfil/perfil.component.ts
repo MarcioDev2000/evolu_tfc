@@ -21,7 +21,8 @@ export class PerfilComponent implements OnInit {
     nif: '',
     tipoUsuario: '',
     matricula: null,
-    especialidade: null
+    especialidade: null,
+    curso: ''
   };
 
   constructor(

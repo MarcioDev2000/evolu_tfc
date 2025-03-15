@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class PerfilComponent implements OnInit {
 
-  
+
     usuario: User = {
       nome: '',
       sobrenome: '',
@@ -22,18 +22,19 @@ export class PerfilComponent implements OnInit {
       nif: '',
       tipoUsuario: '',
       matricula: null,
-      especialidade: null
+      especialidade: null,
+      curso:''
     };
-  
+
     constructor(
       private userService: UserService,
       private router: Router
     ) { }
-  
+
     ngOnInit(): void {
       this.setAlunoId();
     }
-  
+
     setAlunoId(): void {
       const userDataString = localStorage.getItem('user');
       if (userDataString) {
@@ -45,7 +46,7 @@ export class PerfilComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     }
-  
+
     getUsuarioPorId(usuarioId: string): void {
       this.userService.getUsuarioPorId(usuarioId).subscribe(
         (user: User) => {
@@ -57,5 +58,5 @@ export class PerfilComponent implements OnInit {
       );
     }
   }
-  
+
 

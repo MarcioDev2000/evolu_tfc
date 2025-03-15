@@ -30,6 +30,7 @@
                   <th>Email</th>
                   <th>NIF</th>
                   <th>Matrícula</th>
+                  <th>Curso</th>
                 </tr>
               </thead>
               <tbody>
@@ -41,6 +42,7 @@
                   <td>{{ aluno.email }}</td>
                   <td>{{ aluno.nif }}</td>
                   <td>{{ aluno.matricula }}</td>
+                  <td>{{ aluno.curso }}</td>
                 </tr>
                 <tr *ngIf="alunosFiltrados.length === 0">
                   <td colspan="7" class="text-center text-muted py-4">

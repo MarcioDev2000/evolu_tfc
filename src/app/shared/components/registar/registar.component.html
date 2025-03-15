@@ -112,50 +112,73 @@
             </div>
 
             <div class="row">
-              <div class="col-md-12 pr-md-1">
-                <div class="form-group">
-                  <label>Endereço</label>
-                  <input [(ngModel)]="user.endereco" required name="endereco" class="form-control" placeholder="Endereço" type="text" />
-                </div>
+              <!-- Campo de Endereço -->
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Endereço</label>
+                      <input
+                          [(ngModel)]="user.endereco"
+                          required
+                          name="endereco"
+                          class="form-control"
+                          placeholder="Endereço"
+                          type="text"
+                      />
+                  </div>
               </div>
-            </div>
 
-             <!-- Campo de Matrícula (apenas para Aluno) -->
-             <div class="row" *ngIf="selectedUserRole === TipoDeEntidade.aluno">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Matrícula</label>
-                  <input
-                    [(ngModel)]="user.matricula"
-                    required
-                    name="matricula"
-                    class="form-control"
-                    placeholder="Digite a matrícula"
-                    type="text"
-                  />
-                </div>
+              <!-- Campo de Curso -->
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Curso</label>
+                      <select
+                          [(ngModel)]="cursoSelecionado"
+                          required
+                          name="curso"
+                          class="form-control"
+                          (change)="onCursoChange(cursoSelecionado ?? '')"
+                      >
+                          <option value="" disabled selected>Selecione um curso</option>
+                          <option *ngFor="let curso of cursos" [value]="curso.id">
+                              {{ curso.nome }}
+                          </option>
+                      </select>
+                  </div>
               </div>
-            </div>
 
-            <!-- Campo de Especialidade (apenas para Orientador) -->
-            <div class="row" *ngIf="selectedUserRole === TipoDeEntidade.orientador">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label>Especialidade</label>
-                  <select
-                    [(ngModel)]="user.especialidade"
-                    required
-                    name="especialidade"
-                    class="form-control"
-                  >
-                    <option value="" disabled selected>Selecione uma especialidade</option>
-                    <option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
-                      {{ especialidade.nome }}
-                    </option>
-                  </select>
-                </div>
+              <!-- Campo de Especialidade (apenas para Orientador) -->
+              <div class="col-md-12" *ngIf="selectedUserRole === TipoDeEntidade.orientador">
+                  <div class="form-group">
+                      <label>Especialidade</label>
+                      <select
+                          [(ngModel)]="user.especialidade"
+                          required
+                          name="especialidade"
+                          class="form-control"
+                      >
+                          <option value="" disabled selected>Selecione uma especialidade</option>
+                          <option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
+                              {{ especialidade.nome }}
+                          </option>
+                      </select>
+                  </div>
               </div>
-            </div>
+
+              <!-- Campo de Matrícula (apenas para Aluno) -->
+              <div class="col-md-12" *ngIf="selectedUserRole === TipoDeEntidade.aluno">
+                  <div class="form-group">
+                      <label>Matrícula</label>
+                      <input
+                          [(ngModel)]="user.matricula"
+                          required
+                          name="matricula"
+                          class="form-control"
+                          placeholder="Digite a matrícula"
+                          type="text"
+                      />
+                  </div>
+              </div>
+          </div>
 
             <!-- Seleção do tipo de usuário -->
             <div class="tipo_user">

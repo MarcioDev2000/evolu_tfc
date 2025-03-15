@@ -29,6 +29,7 @@
                   <th>Telefone</th>
                   <th>Email</th>
                   <th>NIF</th>
+                  <th>Curso</th>
                   <th>Especialidade</th>
                 </tr>
               </thead>
@@ -40,6 +41,7 @@
                   <td>{{ orientador.telefone }}</td>
                   <td>{{ orientador.email }}</td>
                   <td>{{ orientador.nif }}</td>
+                  <td>{{ orientador.curso }}</td>
                   <td>{{ orientador.especialidade }}</td>
                 </tr>
                 <tr *ngIf="orientadoresFiltrados.length === 0">

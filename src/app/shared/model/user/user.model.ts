@@ -10,4 +10,5 @@ export interface User {
   matricula?: string | null;
   especialidade?: string | null;
   status?: boolean;
+  curso?: string;
 }
