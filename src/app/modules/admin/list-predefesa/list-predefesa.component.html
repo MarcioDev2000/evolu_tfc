@@ -30,7 +30,6 @@
                   <th>Data de Início</th>
                   <th>Data de Fim</th>
                   <th>Status</th>
-                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,19 +50,6 @@
                     }">
                       {{ preDefesa.status }}
                     </span>
-                  </td>
-                  <td>
-                    <div class="d-flex gap-2">
-                      <!-- Botão para editar a pré-defesa -->
-                      <button class="btn btn-sm btn-outline-primary" (click)="editarPreDefesa(preDefesa.id)">
-                        <i class="fas fa-edit"></i> Editar
-                      </button>
-
-                      <!-- Botão para visualizar detalhes -->
-                      <button class="btn btn-sm btn-outline-info" (click)="detalharPreDefesa(preDefesa.id)">
-                        <i class="fas fa-eye"></i> Detalhes
-                      </button>
-                    </div>
                   </td>
                 </tr>
                 <tr *ngIf="preDefesas.length === 0">
