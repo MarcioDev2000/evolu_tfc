@@ -16,7 +16,6 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
   preDefesasFiltradas: any[] = []; // Array para armazenar as pré-defesas filtradas
   isLoading: boolean = true; // Estado de carregamento
   filtro: string = ''; // Filtro de busca
-  podeAdicionarPreDefesa: boolean = false;
   constructor(
     private predefesaService: PreDefesaService,
     private router: Router,
@@ -41,7 +40,6 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
           this.preDefesas = data; // Atribui os dados ao array preDefesas
           this.preDefesasFiltradas = data; // Inicializa o array filtrado com todos os dados
           this.isLoading = false; // Desativa o estado de carregamento
-          this.verificarPermissaoAdicionarPreDefesa(usuarioId);
         },
         (error) => {
           console.error('Erro ao carregar pré-defesas:', error);
@@ -55,25 +53,6 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
     }
   }
 
-  verificarPermissaoAdicionarPreDefesa(usuarioId: string): void {
-    this.usuarioService.getUsuarioPorId(usuarioId).subscribe(
-      (usuario) => {
-        if (usuario && usuario.tipoUsuario === 'Orientador') {
-          // Verifica se o usuário não é presidente ou vogal em nenhuma pré-defesa
-          this.podeAdicionarPreDefesa = !this.preDefesas.some(
-            (preDefesa) =>
-              preDefesa.presidenteId === usuarioId || preDefesa.vogalId === usuarioId
-          );
-        } else {
-          this.podeAdicionarPreDefesa = false;
-        }
-      },
-      (error) => {
-        console.error('Erro ao obter usuário:', error);
-        this.podeAdicionarPreDefesa = false;
-      }
-    );
-  }
 
   // Aplica o filtro de busca
   applyFilter(): void {

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PreDefesaService } from 'src/app/shared/services/pre-defesa.service';
 import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pre-defesa-modal',
@@ -17,8 +18,17 @@ export class PreDefesaModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private preDefesaService: PreDefesaService
+    private preDefesaService: PreDefesaService,
+    private snackBar: MatSnackBar
   ) {}
+
+  showMessage(msg: string): void {
+    this.snackBar.open(msg, 'X', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
 
   salvarAtualizacao(): void {
     const userDataString = localStorage.getItem('user');
@@ -40,8 +50,11 @@ export class PreDefesaModalComponent {
             this.atualizacaoConcluida.emit(); // Notifica o componente pai
           },
           error: (error) => {
-            console.error('Erro ao atualizar status da pré-defesa:', error);
-            Swal.fire('Erro', 'Não foi possível atualizar o status da pré-defesa.', 'error');
+            if (error.error.message === "Apenas o presidente ou o vogal podem atualizar o status da pré-defesa.") {
+              this.showMessage('Não tens permissão para atualizar essa Pré Defesa.');
+            } else {
+              Swal.fire('Erro', 'Não foi possível atualizar o status da pré-defesa.', 'error'); // Mensagem genérica
+            }
           },
         });
     } else {
