@@ -6,6 +6,8 @@ import { GestaoAlunosComponent } from "./gestao-alunos/gestao-alunos.component";
 import { DetalhesAlunosComponent } from "./detalhes-alunos/detalhes-alunos.component";
 import { PerfilComponent } from "./perfil/perfil.component";
 import { ListPreDefesaComponent } from "./list-pre-defesa/list-pre-defesa.component";
+import { MonografiaEMPREDEFESAComponent } from "./monografia-em-pre-defesa/monografia-em-pre-defesa.component";
+import { DetalheMonografiaPreDefesaComponent } from "./detalhe-monografia-pre-defesa/detalhe-monografia-pre-defesa.component";
 
 
 export const ORIENTADOR_ROUTES: Routes = [
@@ -42,6 +44,14 @@ export const ORIENTADOR_ROUTES: Routes = [
       {
         path: 'calendario',
         component: ListPreDefesaComponent
+      },
+      {
+        path: 'pre-defesa',
+        component: MonografiaEMPREDEFESAComponent
+      },
+      {
+        path: 'pre-defesaDetalhe/:id',
+        component: DetalheMonografiaPreDefesaComponent
       },
     ]
   }

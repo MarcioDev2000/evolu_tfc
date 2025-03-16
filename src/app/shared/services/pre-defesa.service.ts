@@ -120,5 +120,61 @@ export class PreDefesaService {
     );
   }
 
+  atualizarStatusPreDefesa(
+    preDefesaId: string,
+    status: string,
+    usuarioId: string,
+    descricao?: string
+  ): Observable<any> {
+    const params = new HttpParams()
+      .set('status', status)
+      .set('usuarioId', usuarioId)
+      .set('descricao', descricao || ''); // Descrição é opcional
+
+    return this.http.put<any>(`${environment.API_URL}/pre-defesas/${preDefesaId}/status`, null, { params }).pipe(
+      tap(() => {
+        this.showMessage('Status da pré-defesa atualizado com sucesso!');
+      }),
+      catchError(error => {
+        console.error('Erro ao atualizar status da pré-defesa:', error);
+        this.showMessage('Erro ao atualizar status da pré-defesa. Tente novamente.');
+        return throwError(error);
+      })
+    );
+  }
+
+  listarPreDefesasComStatusPreMonografia(usuarioId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.API_URL}/pre-defesas/preDefesaStatusmonografia/${usuarioId}`).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar pré-defesas com status da monografia EM_PRE_DEFESA:', error);
+        this.showMessage('Erro ao carregar pré-defesas com status da monografia EM_PRE_DEFESA.');
+        return throwError(error);
+      })
+    );
+  }
+
+  detalharPreDefesaPorIdEUsuario(preDefesaId: string, usuarioId: string): Observable<any> {
+    const params = new HttpParams().set('usuarioId', usuarioId);
+
+    return this.http.get<any>(`${environment.API_URL}/pre-defesas/${preDefesaId}/detalhes`, { params }).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar detalhes da pré-defesa:', error);
+        this.showMessage('Erro ao carregar detalhes da pré-defesa.');
+        return throwError(error);
+      })
+    );
+  }
+
+  visualizarDocumento(id: string, tipoDocumento: string): Observable<Blob> {
+    return this.http.get(`${environment.API_URL}/monografias/${id}/documentos/${tipoDocumento}/visualizar`, {
+      responseType: 'blob' // Para receber o arquivo como um Blob
+    }).pipe(
+      catchError((error) => {
+        console.error('Erro ao visualizar documento:', error);
+        return throwError(error);
+      })
+    );
+  }
+
 
 }
