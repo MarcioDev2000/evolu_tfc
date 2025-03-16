@@ -37,14 +37,13 @@
               </div>
 
               <div class="info-item">
-                <p><strong>Curso:  </strong> <span>{{ monografia.curso }}</span></p>
+                <p><strong>Curso:  </strong> <span>{{ monografia.cursoNome }}</span></p>
               </div>
 
               <div class="info-item">
                 <p><strong>Campo de Estudo:  </strong> <span>{{ monografia.especialidade }}</span></p>
               </div>
 
-              <!-- Bloco condicional para descrição de melhoria ou sucesso -->
               <div class="info-item" *ngIf="monografia.status === 'APROVADO'; else descricaoMelhoria">
                 <p><i class="fas fa-check-circle danger"></i>  <strong>Status Aprovado:</strong> <span class="text-danger">  Sua monografia foi aprovada com sucesso!</span></p>
               </div>
@@ -118,7 +117,6 @@
                     <i class="fas fa-download text-success"></i>
                   </button>
                 </div>
-                <!-- Repetir para outros documentos -->
               </div>
             </div>
           </div>
