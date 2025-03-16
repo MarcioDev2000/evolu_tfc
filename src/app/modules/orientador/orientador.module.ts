@@ -19,6 +19,7 @@ import { DetalhesAlunosComponent } from './detalhes-alunos/detalhes-alunos.compo
 import { ListPreDefesaComponent } from './list-pre-defesa/list-pre-defesa.component';
 import { MonografiaEMPREDEFESAComponent } from './monografia-em-pre-defesa/monografia-em-pre-defesa.component';
 import { DetalheMonografiaPreDefesaComponent } from './detalhe-monografia-pre-defesa/detalhe-monografia-pre-defesa.component';
+import { PreDefesaModalComponent } from './pre-defesa-modal/pre-defesa-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DetalheMonografiaPreDefesaComponent } from './detalhe-monografia-pre-de
     DetalhesAlunosComponent,
     ListPreDefesaComponent,
     MonografiaEMPREDEFESAComponent,
-    DetalheMonografiaPreDefesaComponent
+    DetalheMonografiaPreDefesaComponent,
+    PreDefesaModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,9 @@ import { DetalheMonografiaPreDefesaComponent } from './detalhe-monografia-pre-de
         MatFormFieldModule,
         MatStepperModule,
         MatButtonModule
+  ],
+  entryComponents: [
+    PreDefesaModalComponent
   ]
 })
 export class OrientadorModule { }

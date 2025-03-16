@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ListPreDefesaComponent implements OnInit {
   preDefesas: any[] = []; // Array to store pre-defenses
+  preDefesasFiltradas: any[] = []; // Array to store filtered pre-defenses
+  filtro: string = ''; // Filter term
   isLoading: boolean = true; // Loading state
 
   constructor(
@@ -31,6 +33,7 @@ export class ListPreDefesaComponent implements OnInit {
       this.predefesaService.listarPreDefesasPorUsuario(usuarioId).subscribe(
         (data) => {
           this.preDefesas = data; // Assign the fetched data to the preDefesas array
+          this.preDefesasFiltradas = data; // Initialize filtered array with all data
           this.isLoading = false; // Disable loading state
         },
         (error) => {
@@ -43,5 +46,16 @@ export class ListPreDefesaComponent implements OnInit {
       Swal.fire('Erro', 'Usuário não encontrado.', 'error');
       this.isLoading = false; // Disable loading state
     }
+  }
+
+  // Apply filter based on the search term
+  applyFilter(): void {
+    if (!this.preDefesas) return;
+
+    const termo = this.filtro.toLowerCase();
+    this.preDefesasFiltradas = this.preDefesas.filter((preDefesa: any) =>
+      preDefesa.temaMonografia.toLowerCase().includes(termo) ||
+      preDefesa.statusMonografia.toLowerCase().includes(termo)
+    );
   }
 }

@@ -11,9 +11,10 @@
 
       <!-- Pre-Defense List -->
       <div *ngIf="!isLoading">
+
         <!-- Verifica se há pré-defesas -->
-        <div *ngIf="preDefesas.length > 0; else noPreDefesas">
-          <div *ngFor="let preDefesa of preDefesas" class="card shadow-sm mb-4">
+        <div *ngIf="preDefesasFiltradas.length > 0; else noPreDefesas">
+          <div *ngFor="let preDefesa of preDefesasFiltradas" class="card shadow-sm mb-4">
             <div class="card-header bg-primary text-white">
               <h3 class="title mb-0">Pré-Defesa de {{ preDefesa.alunoNomeCompleto }}</h3>
             </div>
@@ -28,11 +29,11 @@
                   <div class="info-item">
                     <p><strong>Status:</strong>
                       <span class="badge" [ngClass]="{
-                        'badge-success': preDefesa.status === 'APROVADO',
-                        'badge-warning': preDefesa.status === 'MARCADA',
-                        'badge-danger': preDefesa.status === 'CANCELADA'
+                        'badge-success': preDefesa.statusMonografia === 'APROVADO',
+                        'badge-warning': preDefesa.statusMonografia === 'EM_PRE_DEFESA',
+                        'badge-danger': preDefesa.statusMonografia === 'CANCELADA'
                       }">
-                        {{ preDefesa.status }}
+                        {{ preDefesa.statusMonografia }}
                       </span>
                     </p>
                   </div>
@@ -67,6 +68,7 @@
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -76,7 +78,7 @@
           <div class="card shadow-sm">
             <div class="card-body text-center text-muted py-5">
               <i class="fas fa-calendar-times fa-3x mb-3" style="color: white;"></i>
-              <h4 class="card-title">Nenhuma Marcação de Pré-Defesa Marcada</h4>
+              <h4 class="card-title">Nenhuma Pré-Defesa Marcada</h4>
               <p class="card-text" style="color: white;">Não há pré-defesas agendadas no momento.</p>
             </div>
           </div>

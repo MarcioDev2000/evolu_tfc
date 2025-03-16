@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title">Atualizar Status da Pré-Defesa</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="status">Novo Status</label>
+      <select class="form-control" id="status" [(ngModel)]="novoStatus" name="status" style="color: black;">
+        <option value="" disabled selected>Selecione um status</option>
+        <option value="APROVADO">Aprovado</option>
+        <option value="EM_REVISAO">Em Revisão</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea
+        class="form-control"
+        id="descricao"
+        [(ngModel)]="descricao"
+        name="descricao"
+        rows="3"
+        style="color: black;"
+      ></textarea>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('Cancelar')">Cancelar</button>
+  <button type="button" class="btn btn-danger" (click)="salvarAtualizacao()">Salvar</button>
+</div>

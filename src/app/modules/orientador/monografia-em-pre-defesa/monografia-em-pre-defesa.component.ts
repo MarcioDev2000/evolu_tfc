@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PreDefesaService } from 'src/app/shared/services/pre-defesa.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { PreDefesaModalComponent } from '../pre-defesa-modal/pre-defesa-modal.component';
 
 @Component({
   selector: 'app-monografia-em-pre-defesa',
@@ -16,7 +18,8 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
 
   constructor(
     private predefesaService: PreDefesaService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +65,14 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
 
   detalharPreDefesa(id: string): void {
     this.router.navigate(['/orientador/pre-defesaDetalhe', id]);
+  }
+
+  // Abre o modal de atualização de pré-defesa
+  abrirModalAtualizacao(preDefesa: any): void {
+    const modalRef = this.modalService.open(PreDefesaModalComponent, { size: 'lg' });
+    modalRef.componentInstance.preDefesa = preDefesa;
+    modalRef.componentInstance.atualizacaoConcluida.subscribe(() => {
+      this.loadPreDefesasComStatusPreMonografia(); // Recarrega as pré-defesas após a atualização
+    });
   }
 }
