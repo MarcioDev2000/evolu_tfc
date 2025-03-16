@@ -137,11 +137,23 @@ carregarEspecialidadesPorCurso(cursoId: string): void {
             });
         },
         error => {
+            // Verifique se o erro é um erro de "Email já cadastrado"
             if (error.status === 400) {
-                if (error.error?.email === 'Email inválido') {
+                // Acessa a mensagem de erro no campo "email"
+                if (error.error?.email  === 'Email já cadastrado.') {
+                    this.openSnackBar('Erro', 'Email já cadastrado.', 'error');
+                } else if (error.error?.email === 'Email inválido') {
                     this.openSnackBar('Erro', 'Email do usuário inválido.', 'error');
+                } else if (error.error?.email === 'O NIF já está cadastrado no sistema.') {
+                  this.openSnackBar('Erro', 'O NIF já está cadastrado no sistema.', 'error');
+              }
+
+                else {
+                    // Mensagem de erro genérica, caso algum outro erro aconteça
+                    this.openSnackBar('Erro', 'Ocorreu um erro ao criar o usuário.', 'error');
                 }
             } else {
+                // Caso seja outro tipo de erro (não 400)
                 Swal.fire('Erro', 'Ocorreu um erro ao criar o usuário.', 'error');
             }
         }
