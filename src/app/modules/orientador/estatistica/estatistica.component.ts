@@ -50,7 +50,13 @@ export class EstatisticaComponent implements OnInit {
         },
         (error: any) => {
           console.error('Erro ao carregar estatísticas do orientador:', error);
-          Swal.fire('Erro', 'Não foi possível carregar as estatísticas do orientador.', 'error');
+          // Limpa os dados para exibir a mensagem no HTML
+          this.estatisticasOrientador = {
+            monografiasAprovadas: 0,
+            monografiasEmRevisao: 0,
+            monografiasPendentes: 0,
+            numeroAlunosOrientados: 0
+          };
         }
       );
     } else {
@@ -58,7 +64,6 @@ export class EstatisticaComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-
   renderizarGrafico(): void {
     const ctx = document.getElementById('estatisticaChart') as HTMLCanvasElement;
     new Chart(ctx, {

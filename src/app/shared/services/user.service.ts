@@ -13,7 +13,6 @@ import { TipoUsuario } from '../model/user/TipoUsuario.enum';
   providedIn: 'root'
 })
 export class UserService {
-
   private _userSubject = new BehaviorSubject<any>(null);
   user$ = this._userSubject.asObservable();
 
