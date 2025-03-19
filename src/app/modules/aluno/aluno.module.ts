@@ -19,6 +19,8 @@ import { AtualizarMonografiaComponent } from './atualizar-monografia/atualizar-m
 import { DetalheMonografiaComponent } from './detalhe-monografia/detalhe-monografia.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ListPreDefesaComponent } from './list-pre-defesa/list-pre-defesa.component';
+import { MonografiaEmPreDefesaComponent } from './monografia-em-pre-defesa/monografia-em-pre-defesa.component';
+import { DefesaMarcadaComponent } from './defesa-marcada/defesa-marcada.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ListPreDefesaComponent } from './list-pre-defesa/list-pre-defesa.compon
     AtualizarMonografiaComponent,
     DetalheMonografiaComponent,
     PerfilComponent,
-    ListPreDefesaComponent
+    ListPreDefesaComponent,
+    MonografiaEmPreDefesaComponent,
+    DefesaMarcadaComponent
   ],
   imports: [
     CommonModule,

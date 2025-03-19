@@ -6,9 +6,9 @@
 
   <!-- Cards e gráfico (exibidos apenas se houver monografias) -->
   <div *ngIf="!nenhumaMonografia">
-    <!-- Cards para Aprovado, Em Revisão e Pendente -->
+    <!-- Cards para Aprovado, Em Revisão, Pendente, Em Pré-Defesa e Em Defesa -->
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="card text-white bg-primary mb-3">
           <div class="card-header">Status: Aprovado</div>
           <div class="card-body">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="card text-white bg-success mb-3">
           <div class="card-header">Status: Em Revisão</div>
           <div class="card-body">
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="card text-white bg-warning mb-3">
           <div class="card-header">Status: Pendente</div>
           <div class="card-body">
@@ -34,19 +34,21 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Gráfico de Estatísticas -->
-    <div class="row mt-4">
-      <div class="col-md-12">
-        <div class="card" style="background-color: white;">
-          <div class="card-header">
-            <h5 class="card-title">Estatísticas da Monografia</h5>
-          </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+          <div class="card-header">Status: Em Pré-Defesa</div>
           <div class="card-body">
-            <div class="chart-container" style="position: relative; height: 400px; background-color: white;">
-              <canvas id="estatisticaChart"></canvas>
-            </div>
+            <h5 class="card-title">{{ estatisticasStatus.Em_Pre_Defesa }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card text-white bg-primar mb-3">
+          <div class="card-header">Status: Em Defesa</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ estatisticasStatus.Em_Defesa }}</h5>
           </div>
         </div>
       </div>

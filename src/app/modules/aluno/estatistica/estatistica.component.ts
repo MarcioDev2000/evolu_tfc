@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import * as Chart from 'chart.js';
 import { MonografiaService } from "src/app/shared/services/monografia.service";
 import Swal from 'sweetalert2';
 
@@ -20,11 +19,15 @@ export class EstatisticaComponent implements OnInit {
   };
   nenhumaMonografia: boolean = false;
 
+
   estatisticasStatus: any = {
     Aprovado: 0,
     Em_Revisao: 0,
-    Pendente: 0
+    Pendente: 0,
+    Em_Pre_Defesa: 0, // Adiciona o status Em Pré-Defesa
+    Em_Defesa: 0      // Adiciona o status Em Defesa
   };
+
 
   public canvas: any;
   public ctx: CanvasRenderingContext2D;
@@ -59,7 +62,6 @@ export class EstatisticaComponent implements OnInit {
           } else {
             this.nenhumaMonografia = false; // Define que há monografias
             this.estatisticas = data;
-            this.renderizarGrafico(); // Renderiza o gráfico apenas se houver dados
           }
         },
         (error: any) => {
@@ -92,77 +94,4 @@ export class EstatisticaComponent implements OnInit {
     }
   }
 
-  renderizarGrafico(): void {
-    const ctx = document.getElementById('estatisticaChart') as HTMLCanvasElement;
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Revisões', 'Tempo Médio (dias)', 'Dias no Status', 'Chance de Aprovação (%)'],
-        datasets: [{
-          label: 'Estatísticas da Monografia',
-          data: [
-            this.estatisticas.numeroRevisoes,
-            this.estatisticas.tempoMedioRevisao,
-            this.estatisticas.diasNoStatus,
-            parseFloat(this.estatisticas.chanceAprovacao)
-          ],
-          backgroundColor: [
-            'rgba(54, 162, 235, 0.6)', // Azul
-            'rgba(75, 192, 192, 0.6)', // Verde
-            'rgba(255, 206, 86, 0.6)', // Amarelo
-            'rgba(255, 99, 132, 0.6)'  // Vermelho
-          ],
-          borderColor: [
-            'rgba(54, 162, 235, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(255, 99, 132, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'Valores'
-            }
-          }],
-          xAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Categorias'
-            }
-          }]
-        },
-        legend: {
-          display: true,
-          position: 'top',
-          labels: {
-            fontColor: '#333',
-            fontSize: 14
-          }
-        },
-        tooltips: {
-          enabled: true,
-          mode: 'index',
-          intersect: false,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          titleFontSize: 16,
-          bodyFontSize: 14,
-          footerFontSize: 12
-        },
-        animation: {
-          duration: 1000,
-          easing: 'easeInOutQuart'
-        }
-      }
-    });
-  }
 }

@@ -7,6 +7,7 @@ import { AtualizarMonografiaComponent } from "./atualizar-monografia/atualizar-m
 import { DetalheMonografiaComponent } from "./detalhe-monografia/detalhe-monografia.component";
 import { PerfilComponent } from "./perfil/perfil.component";
 import { ListPreDefesaComponent } from "./list-pre-defesa/list-pre-defesa.component";
+import { MonografiaEmPreDefesaComponent } from "./monografia-em-pre-defesa/monografia-em-pre-defesa.component";
 export const ALUNO_ROUTES: Routes = [
   {
     path: '',
@@ -45,6 +46,10 @@ export const ALUNO_ROUTES: Routes = [
       {
         path: 'calendario',
         component: ListPreDefesaComponent
+      },
+      {
+        path: 'pre-defesa',
+        component: MonografiaEmPreDefesaComponent
       },
 
     ]

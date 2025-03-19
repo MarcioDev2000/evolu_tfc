@@ -1,0 +1,110 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <!-- Cabeçalho do Card -->
+        <div class="card-header bg-primary text-white">
+          <h3 class="title mb-0">Defesas dos Alunos</h3>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="col-md-4 pr-md-1">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Filtrar Temas e Status"
+                [(ngModel)]="filtro"
+                (input)="applyFilter()">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th>Tema</th>
+                  <th>Status</th>
+                  <th>Aluno</th>
+                  <th>Campo de estudo</th>
+                  <th>Orientador</th>
+                  <th>Presidente</th>
+                  <th>Vogal</th>
+                  <th>Projeto</th>
+                  <th>Data Inicio</th>
+                  <th>Data Fim</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let defesa of defesasFiltradas">
+                  <td>{{ defesa.temaMonografia }}</td>
+                  <td>
+                    <span class="status" [ngClass]="{
+                      'badge badge-success': defesa.status === 'APROVADO',
+                      'badge badge-warning': defesa.status === 'PENDENTE',
+                      'badge badge-danger': defesa.status === 'EM_REVISAO'
+                    }">
+                      {{ defesa.statusMonografia }}
+                    </span>
+                  </td>
+                  <td>{{ defesa.alunoNomeCompleto }}</td>
+                  <td>{{ defesa.especialidadeNome }}</td>
+                  <td>{{ defesa.orientadorNomeCompleto }}</td>
+                  <td>{{ defesa.presidenteNomeCompleto }}</td>
+                  <td>{{ defesa.vogalNomeCompleto }}</td>
+                  <td>
+                    <button class="btn btn-link text-decoration-none" type="button" placement="left"
+                      ngbTooltip="Visualizar Projeto" container="body" (click)="visualizarDocumento(defesa.linkProjeto, 'projeto')">
+                      <i class="fas fa-file-pdf text-danger"></i>
+                      <span class="text-primary">Projeto</span>
+                      <i class="fas fa-eye text-info"></i>
+                    </button>
+                  </td>
+                  <td>{{ defesa.dataInicio | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ defesa.dataFim | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <button class="btn btn-sm btn-outline-success" (click)="abrirModalAplicarNota(defesa, modalNota)">
+                        <i class="fas fa-star"></i> Avaliar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="defesasFiltradas.length === 0">
+                  <td colspan="11" class="text-center text-muted py-4">
+                    <i class="fas fa-spinner fa-spin"></i> Nenhuma defesa encontrada.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Aplicação de Nota -->
+<ng-template #modalNota let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Aplicar Nota e Observação</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="nota">Nota</label>
+        <input type="number" id="nota" class="form-control" [(ngModel)]="nota" name="nota" min="0" max="20">
+      </div>
+      <div class="form-group">
+        <label for="observacoes">Observações</label>
+        <textarea id="observacoes" class="form-control" [(ngModel)]="observacoes" name="observacoes"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="aplicarNotaObservacao(modal)">Salvar</button>
+  </div>
+</ng-template>

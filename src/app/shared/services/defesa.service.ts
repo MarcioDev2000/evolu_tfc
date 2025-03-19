@@ -82,10 +82,11 @@ export class DefesaService {
   }
 
   // Aplicar nota e observação a uma defesa
-  aplicarNotaObservacao(defesaId: string, nota: number, observacoes: string): Observable<any> {
+  aplicarNotaObservacao(defesaId: string, nota: number, observacoes: string, usuarioId: string): Observable<any> {
     const params = new HttpParams()
       .set('nota', nota.toString())
-      .set('observacoes', observacoes);
+      .set('observacoes', observacoes)
+      .set('usuarioId', usuarioId); // Adiciona o usuarioId como parâmetro
 
     return this.http.put<any>(`${environment.API_URL}/defesas/aplicarNota/${defesaId}`, null, { params }).pipe(
       tap(() => this.showMessage('Nota e observação aplicadas com sucesso!')),
@@ -113,6 +114,17 @@ export class DefesaService {
       catchError((error) => {
         console.error('Erro ao buscar orientadores:', error);
         this.showMessage('Erro ao carregar orientadores.');
+        return throwError(error);
+      })
+    );
+  }
+
+  listarDefesasMarcadasStatus(usuarioId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/defesas/marcadas/status/${usuarioId}`).pipe(
+      tap(() => this.showMessage('Defesas marcadas carregadas com sucesso!')),
+      catchError((error) => {
+        console.error('Erro ao buscar defesas marcadas:', error);
+        this.showMessage('Erro ao carregar defesas marcadas.');
         return throwError(error);
       })
     );

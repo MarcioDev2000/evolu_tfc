@@ -8,6 +8,7 @@ import { PerfilComponent } from "./perfil/perfil.component";
 import { ListPreDefesaComponent } from "./list-pre-defesa/list-pre-defesa.component";
 import { MonografiaEMPREDEFESAComponent } from "./monografia-em-pre-defesa/monografia-em-pre-defesa.component";
 import { DetalheMonografiaPreDefesaComponent } from "./detalhe-monografia-pre-defesa/detalhe-monografia-pre-defesa.component";
+import { DetalheMarcacaoDefesaComponent } from "./detalhe-marcacao-defesa/detalhe-marcacao-defesa.component";
 
 
 export const ORIENTADOR_ROUTES: Routes = [
@@ -52,6 +53,10 @@ export const ORIENTADOR_ROUTES: Routes = [
       {
         path: 'pre-defesaDetalhe/:id',
         component: DetalheMonografiaPreDefesaComponent
+      },
+      {
+        path: 'defesa',
+        component: DetalheMarcacaoDefesaComponent
       },
     ]
   }
