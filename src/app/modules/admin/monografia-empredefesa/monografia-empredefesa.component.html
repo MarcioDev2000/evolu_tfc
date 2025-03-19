@@ -1,0 +1,77 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <!-- Cabeçalho do Card -->
+        <div class="card-header bg-primary text-white">
+          <h3 class="title mb-0">Pré-Defesas Marcadas</h3>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="col-md-4 pr-md-1">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Filtrar Temas e Status"
+                [(ngModel)]="filtro"
+                (input)="applyFilter()">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th>Tema</th>
+                  <th>Aluno</th>
+                  <th>Orientador</th>
+                  <th>Campo de Estudo</th>
+                  <th>Presidente</th>
+                  <th>Vogal</th>
+                  <th>Data de Início</th>
+                  <th>Data de Fim</th>
+                  <th>Status da Monografia</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let preDefesa of preDefesasFiltradas">
+                  <td>{{ preDefesa.temaMonografia }}</td>
+                  <td>{{ preDefesa.alunoNomeCompleto }}</td>
+                  <td>{{ preDefesa.orientadorNomeCompleto }}</td>
+                  <td>{{ preDefesa.especialidadeNome }}</td>
+                  <td>{{ preDefesa.presidenteNomeCompleto }}</td>
+                  <td>{{ preDefesa.vogalNomeCompleto }}</td>
+                  <td>{{ preDefesa.dataInicio | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td>{{ preDefesa.dataFim | date:'dd/MM/yyyy HH:mm' }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                      'badge-success': preDefesa.statusMonografia === 'APROVADO',
+                      'badge-warning': preDefesa.statusMonografia === 'EM_PRE_DEFESA',
+                      'badge-danger': preDefesa.statusMonografia === 'EM_DEFESA'
+                    }">
+                      {{ preDefesa.statusMonografia }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="d-flex gap-2">
+                      <!-- Botão para editar a pré-defesa -->
+                      <button class="btn btn-sm btn-danger" >
+                        <i class="fas fa-plus"></i> Add Pré-Defesa
+                      </button>
+
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="preDefesasFiltradas.length === 0">
+                  <td colspan="10" class="text-center text-muted py-4">
+                    <i class="fas fa-spinner fa-spin"></i> Nenhuma pré-defesa encontrada.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Estilo para o cabeçalho do card */
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo para o título */
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Estilo para o input de filtro */
+.input-group {
+  max-width: 400px;
+}
+
+.input-group-text {
+  background-color: #fff;
+  border-left: none;
+  cursor: pointer;
+}
+
+.badge-danger{
+  background-color: #10722e;
+}

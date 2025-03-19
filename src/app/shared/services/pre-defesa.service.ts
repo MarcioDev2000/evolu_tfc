@@ -34,6 +34,17 @@ export class PreDefesaService {
       })
     );
   }
+
+  listarMonografiasEmPreDefesaStatus(usuarioId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.API_URL}/pre-defesas/monografias-em-pre-defesa/${usuarioId}`).pipe(
+      catchError((error) => {
+        console.error('Erro ao buscar monografias em pré-defesa:', error);
+        this.showMessage('Erro ao carregar monografias em pré-defesa.');
+        return throwError(error);
+      })
+    );
+  }
+
   listarTodasPreDefesas(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.API_URL}/pre-defesas/admin`).pipe(
       catchError((error) => {

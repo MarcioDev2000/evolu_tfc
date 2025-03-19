@@ -10,6 +10,7 @@ import { PreDefesaComponent } from "./pre-defesa/pre-defesa.component";
 import { DetalheMarcarPreDefesaComponent } from "./detalhe-marcar-pre-defesa/detalhe-marcar-pre-defesa.component";
 import { ListPredefesaComponent } from "./list-predefesa/list-predefesa.component";
 import { ListUsersComponent } from "./list-users/list-users.component";
+import { MonografiaEMPREDEFESAComponent } from "./monografia-empredefesa/monografia-empredefesa.component";
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
@@ -60,7 +61,11 @@ export const ADMIN_ROUTES: Routes = [
       {
         path: 'user-inativos',
         component: ListUsersComponent
-      }
+      },
+       {
+         path: 'pre-defesa',
+        component: MonografiaEMPREDEFESAComponent
+       },
 
     ]
   }
