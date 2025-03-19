@@ -121,6 +121,17 @@ export class PreDefesaService {
     );
   }
 
+  // No arquivo PreDefesaService (Angular)
+getOrientadorPorId(orientadorId: string): Observable<any> {
+  return this.http.get<any>(`${environment.API_URL}/orientadores/${orientadorId}`).pipe(
+    catchError((error) => {
+      console.error('Erro ao buscar orientador:', error);
+      this.showMessage('Erro ao carregar orientador.');
+      return throwError(error);
+    })
+  );
+}
+
   buscarPreDefesaPorId(id: string): Observable<any> {
     return this.http.get<any>(`${environment.API_URL}/pre-defesas/${id}`).pipe(
       catchError((error) => {

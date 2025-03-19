@@ -22,6 +22,7 @@ import { DetalheMarcarPreDefesaComponent } from './detalhe-marcar-pre-defesa/det
 import { ListPredefesaComponent } from './list-predefesa/list-predefesa.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { MonografiaEMPREDEFESAComponent } from './monografia-empredefesa/monografia-empredefesa.component';
+import { MarcarDefesaComponent } from './marcar-defesa/marcar-defesa.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MonografiaEMPREDEFESAComponent } from './monografia-empredefesa/monogra
     DetalheMarcarPreDefesaComponent,
     ListPredefesaComponent,
     ListUsersComponent,
-    MonografiaEMPREDEFESAComponent
+    MonografiaEMPREDEFESAComponent,
+    MarcarDefesaComponent
   ],
   imports: [
     CommonModule,

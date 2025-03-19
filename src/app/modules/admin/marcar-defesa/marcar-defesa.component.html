@@ -1,0 +1,102 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h3 class="title">Agendar Defesa</h3>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()" [formGroup]="defesaForm">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Tema da Monografia</label>
+                  <input
+                    formControlName="temaMonografia"
+                    class="form-control"
+                    type="text"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Presidente</label>
+                  <input
+                    formControlName="presidenteNome"
+                    class="form-control"
+                    type="text"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Vogal</label>
+                  <input
+                    formControlName="vogalNome"
+                    class="form-control"
+                    type="text"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Data de Início</label>
+                  <input
+                    formControlName="dataInicio"
+                    class="form-control"
+                    type="datetime-local"
+                    required
+                  />
+                  <div *ngIf="defesaForm.get('dataInicio')?.invalid && defesaForm.get('dataInicio')?.touched" class="invalid-feedback" style="color: #fd5d93;">
+                    <div *ngIf="defesaForm.get('dataInicio')?.errors?.['required']">
+                      A data de início é obrigatória.
+                    </div>
+                    <div *ngIf="defesaForm.get('dataInicio')?.errors?.['dataInvalida']">
+                      A data de início da defesa deve ser futura.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Data de Fim</label>
+                  <input
+                    formControlName="dataFim"
+                    class="form-control"
+                    type="datetime-local"
+                    required
+                  />
+                  <div *ngIf="defesaForm.get('dataFim')?.invalid && defesaForm.get('dataFim')?.touched" class="invalid-feedback" style="color: #fd5d93;">
+                    <div *ngIf="defesaForm.get('dataFim')?.errors?.['required']">
+                      A data de fim é obrigatória.
+                    </div>
+                    <div *ngIf="defesaForm.errors?.['dataFimInvalida']">
+                      A data de término da defesa deve ser posterior à data de início.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer text-center">
+              <button class="btn btn-fill btn-danger" type="submit" [disabled]="defesaForm.invalid">
+                Agendar Defesa
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

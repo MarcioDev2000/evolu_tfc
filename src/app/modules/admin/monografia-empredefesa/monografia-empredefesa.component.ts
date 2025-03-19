@@ -17,7 +17,8 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
   filtro: string = ''; // Filtro de busca
 
   constructor(
-    private predefesaService: PreDefesaService
+    private predefesaService: PreDefesaService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -60,4 +61,9 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
       preDefesa.statusMonografia.toLowerCase().includes(termo)
     );
   }
+
+  MarcarDefesa(id: string): void {
+    this.router.navigate(['/admin/marcar-defesa', id]);
+  }
+
 }
