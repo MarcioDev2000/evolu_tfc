@@ -29,7 +29,6 @@ export class PreDefesaModalComponent {
       verticalPosition: 'top',
     });
   }
-
   salvarAtualizacao(): void {
     const userDataString = localStorage.getItem('user');
     if (userDataString) {

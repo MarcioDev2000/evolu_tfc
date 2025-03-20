@@ -68,7 +68,7 @@ export class MarcarDefesaComponent implements OnInit {
       (error) => {
         console.error('Erro ao carregar pré-defesa:', error);
         Swal.fire('Erro', 'Não foi possível carregar a pré-defesa.', 'error');
-        this.router.navigate(['/admin/calendario']);
+        this.router.navigate(['/admin/pre-defesa']);
       }
     );
   }
@@ -196,7 +196,7 @@ onSubmit(): void {
     (response) => {
       Swal.fire('Sucesso', 'Defesa marcada com sucesso!', 'success').then(() => {
         this.resetFormulario();
-        this.router.navigate(['/admin/calendario']);
+        this.router.navigate(['/admin/defesa']);
       });
     },
     (error) => {

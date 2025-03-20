@@ -26,7 +26,6 @@ export class DefesaService {
     });
   }
 
-  // Marcar uma defesa
   marcarDefesa(preDefesaId: string, dataInicio: string, dataFim: string, presidenteId: string, vogalId: string): Observable<any> {
     const params = new HttpParams()
       .set('preDefesaId', preDefesaId)
@@ -34,7 +33,6 @@ export class DefesaService {
       .set('dataFim', dataFim)
       .set('presidenteId', presidenteId)
       .set('vogalId', vogalId);
-
     return this.http.post<any>(`${environment.API_URL}/defesas/marcar`, null, { params }).pipe(
       tap(() => this.showMessage('Defesa marcada com sucesso!')),
       catchError((error) => {
@@ -44,7 +42,6 @@ export class DefesaService {
       })
     );
   }
-
   // Listar defesas por aluno
   listarDefesasPorAluno(alunoId: string): Observable<any> {
     return this.http.get<any>(`${environment.API_URL}/defesas/aluno/${alunoId}`).pipe(
