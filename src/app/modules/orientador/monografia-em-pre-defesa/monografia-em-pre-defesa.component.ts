@@ -16,6 +16,7 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
   preDefesasFiltradas: any[] = []; // Array para armazenar as pré-defesas filtradas
   isLoading: boolean = true; // Estado de carregamento
   filtro: string = ''; // Filtro de busca
+  isPresidenteOrVogal: boolean = false;
   constructor(
     private predefesaService: PreDefesaService,
     private router: Router,
@@ -39,6 +40,10 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
         (data) => {
           this.preDefesas = data; // Atribui os dados ao array preDefesas
           this.preDefesasFiltradas = data; // Inicializa o array filtrado com todos os dados
+          // Verifica se o usuário é presidente ou vogal para cada pré-defesa
+          this.preDefesasFiltradas.forEach(preDefesa => {
+            preDefesa.podeEditar = usuarioId === preDefesa.presidenteId || usuarioId === preDefesa.vogalId;
+          });
           this.isLoading = false; // Desativa o estado de carregamento
         },
         (error) => {
@@ -52,6 +57,7 @@ export class MonografiaEMPREDEFESAComponent implements OnInit {
       this.isLoading = false; // Desativa o estado de carregamento
     }
   }
+
 
 
   // Aplica o filtro de busca

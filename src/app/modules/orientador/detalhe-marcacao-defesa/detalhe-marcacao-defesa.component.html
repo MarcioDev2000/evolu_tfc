@@ -41,7 +41,8 @@
                     <span class="status" [ngClass]="{
                       'badge badge-success': defesa.status === 'APROVADO',
                       'badge badge-warning': defesa.status === 'PENDENTE',
-                      'badge badge-danger': defesa.status === 'EM_REVISAO'
+                      'badge badge-danger': defesa.status === 'EM_REVISAO',
+                      'badge badge-defesa': defesa.statusMonografia === 'EM_DEFESA'
                     }">
                       {{ defesa.statusMonografia }}
                     </span>
@@ -62,7 +63,7 @@
                   <td>{{ defesa.dataInicio | date:'dd/MM/yyyy HH:mm' }}</td>
                   <td>{{ defesa.dataFim | date:'dd/MM/yyyy HH:mm' }}</td>
                   <td>
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2" *ngIf="defesa.presidenteId === usuarioId || defesa.vogalId === usuarioId">
                       <button class="btn btn-sm btn-outline-success" (click)="abrirModalAplicarNota(defesa, modalNota)">
                         <i class="fas fa-star"></i> Avaliar
                       </button>

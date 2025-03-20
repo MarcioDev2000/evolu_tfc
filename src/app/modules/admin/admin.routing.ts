@@ -12,6 +12,8 @@ import { ListPredefesaComponent } from "./list-predefesa/list-predefesa.componen
 import { ListUsersComponent } from "./list-users/list-users.component";
 import { MonografiaEMPREDEFESAComponent } from "./monografia-empredefesa/monografia-empredefesa.component";
 import { MarcarDefesaComponent } from "./marcar-defesa/marcar-defesa.component";
+import { DetalheDefesaComponent } from "./detalhe-defesa/detalhe-defesa.component";
+import { DefesaMarcadaComponent } from "./defesa-marcada/defesa-marcada.component";
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
@@ -63,6 +65,7 @@ export const ADMIN_ROUTES: Routes = [
         path: 'marcar-defesa/:id',
         component: MarcarDefesaComponent
       },
+
       {
         path: 'user-inativos',
         component: ListUsersComponent
@@ -71,6 +74,15 @@ export const ADMIN_ROUTES: Routes = [
          path: 'pre-defesa',
         component: MonografiaEMPREDEFESAComponent
        },
+
+      {
+        path: 'defesa',
+       component: DefesaMarcadaComponent
+      },
+       {
+        path: 'detalhe-defesa',
+        component: DetalheDefesaComponent
+       }
 
     ]
   }

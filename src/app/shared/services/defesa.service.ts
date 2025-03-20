@@ -140,4 +140,15 @@ export class DefesaService {
     );
   }
 
+  listarDefesasMarcadasStatusAlunos(usuarioId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/defesas/marcadas/status/aluno/${usuarioId}`).pipe(
+      tap(() => this.showMessage('Defesas marcadas para alunos carregadas com sucesso!')),
+      catchError((error) => {
+        console.error('Erro ao buscar defesas marcadas para alunos:', error);
+        this.showMessage('Erro ao carregar defesas marcadas para alunos.');
+        return throwError(error);
+      })
+    );
+  }
+
 }

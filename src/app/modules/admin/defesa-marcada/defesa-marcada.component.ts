@@ -36,7 +36,7 @@ export class DefesaMarcadaComponent implements OnInit {
 
       const usuario = JSON.parse(userData);
       this.usuarioId = usuario.id; // Armazena o usuarioId
-      this.defesaService.listarDefesasMarcadasStatusAlunos(usuario.id).subscribe({
+      this.defesaService.listarDefesasMarcadasStatus(usuario.id).subscribe({
         next: (data) => {
           this.defesas = data;
           this.defesasFiltradas = [...this.defesas];

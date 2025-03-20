@@ -36,7 +36,9 @@
                     <span class="status" [ngClass]="{
                       'badge badge-success': monografia.status === 'APROVADO',
                       'badge badge-warning': monografia.status === 'PENDENTE',
-                      'badge badge-danger': monografia.status === 'EM_REVISAO'
+                      'badge badge-danger': monografia.status === 'EM_REVISAO',
+                      'badge badge-predefesa': monografia.status === 'EM_PRE_DEFESA',
+                      'badge badge-defesa': monografia.status === 'EM_DEFESA'
                     }">
                       {{ monografia.status }}
                     </span>
@@ -70,9 +72,13 @@
                         <i class="fas fa-id-card"></i> Documento BI
                       </button>
                       <!-- Botão para abrir o modal de atualização -->
-                      <button class="btn btn-sm btn-outline-success" (click)="abrirModalAtualizacao(monografia, modalAtualizacao)">
-                        <i class="fas fa-sync-alt"></i> Atualizar
-                      </button>
+                   <!-- Botão para abrir o modal de atualização -->
+<button class="btn btn-sm btn-outline-success"
+*ngIf="monografia.status !== 'EM_PRE_DEFESA' && monografia.status !== 'EM_DEFESA'"
+(click)="abrirModalAtualizacao(monografia, modalAtualizacao)">
+<i class="fas fa-sync-alt"></i> Atualizar
+</button>
+
 
                       <button class="btn btn-sm btn-outline-info" (click)="DetalheMonografia(monografia.id)">
                         <i class="fas fa-eye"></i>

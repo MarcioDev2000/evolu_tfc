@@ -55,9 +55,11 @@
                   <td>
                     <div class="d-flex gap-2">
                       <!-- Botão para editar a pré-defesa -->
-                      <button class="btn btn-sm btn-danger" (click)="abrirModalAtualizacao(preDefesa)">
-                        <i class="fas fa-plus"></i> Add Pré-Defesa
-                      </button>
+                      <button class="btn btn-sm btn-danger"
+                      *ngIf="preDefesa.podeEditar"
+                      (click)="abrirModalAtualizacao(preDefesa)">
+                <i class="fas fa-plus"></i> Add Pré-Defesa
+              </button>
                       <!-- Botão para visualizar detalhes -->
                       <button class="btn btn-sm btn-outline-info" (click)="detalharPreDefesa(preDefesa.id)">
                         <i class="fas fa-eye"></i> Detalhes

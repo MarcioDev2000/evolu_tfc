@@ -21,6 +21,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ListPreDefesaComponent } from './list-pre-defesa/list-pre-defesa.component';
 import { MonografiaEmPreDefesaComponent } from './monografia-em-pre-defesa/monografia-em-pre-defesa.component';
 import { DefesaMarcadaComponent } from './defesa-marcada/defesa-marcada.component';
+import { DetalheDefesaComponent } from './detalhe-defesa/detalhe-defesa.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DefesaMarcadaComponent } from './defesa-marcada/defesa-marcada.componen
     PerfilComponent,
     ListPreDefesaComponent,
     MonografiaEmPreDefesaComponent,
-    DefesaMarcadaComponent
+    DefesaMarcadaComponent,
+    DetalheDefesaComponent
   ],
   imports: [
     CommonModule,

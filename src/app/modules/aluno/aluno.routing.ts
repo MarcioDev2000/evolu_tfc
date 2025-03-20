@@ -8,6 +8,8 @@ import { DetalheMonografiaComponent } from "./detalhe-monografia/detalhe-monogra
 import { PerfilComponent } from "./perfil/perfil.component";
 import { ListPreDefesaComponent } from "./list-pre-defesa/list-pre-defesa.component";
 import { MonografiaEmPreDefesaComponent } from "./monografia-em-pre-defesa/monografia-em-pre-defesa.component";
+import { DefesaMarcadaComponent } from "./defesa-marcada/defesa-marcada.component";
+import { DetalheDefesaComponent } from "./detalhe-defesa/detalhe-defesa.component";
 export const ALUNO_ROUTES: Routes = [
   {
     path: '',
@@ -51,6 +53,14 @@ export const ALUNO_ROUTES: Routes = [
         path: 'pre-defesa',
         component: MonografiaEmPreDefesaComponent
       },
+      {
+        path: 'defesa',
+        component: DefesaMarcadaComponent
+      },
+      {
+        path: 'detalhe-defesa',
+        component: DetalheDefesaComponent
+      }
     ]
   }
 ];
