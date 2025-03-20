@@ -129,4 +129,15 @@ export class DefesaService {
       })
     );
   }
+  listarDefesasMarcadasStatusAprovado(usuarioId: string): Observable<any> {
+    return this.http.get<any>(`${environment.API_URL}/defesas/marcadas/status/aprovado/${usuarioId}`).pipe(
+      tap(() => this.showMessage('Defesas aprovadas carregadas com sucesso!')),
+      catchError((error) => {
+        console.error('Erro ao buscar defesas aprovadas:', error);
+        this.showMessage('Erro ao carregar defesas aprovadas.');
+        return throwError(error);
+      })
+    );
+  }
+
 }

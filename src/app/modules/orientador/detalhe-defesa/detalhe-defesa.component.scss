@@ -1,0 +1,53 @@
+
+.status {
+  margin: 8px;
+  border-radius: 12px;
+  padding: 5px 10px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+.badge-warning {
+  background-color: #c29125;
+}
+
+.badge-danger {
+  background-color: #358bdc;
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Estilo para o cabeçalho do card */
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo para o título */
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Estilo para o input de filtro */
+.input-group {
+  max-width: 400px;
+}
+
+.input-group-text {
+  background-color: #fff;
+  border-left: none;
+  cursor: pointer;
+}

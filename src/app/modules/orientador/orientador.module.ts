@@ -21,6 +21,7 @@ import { MonografiaEMPREDEFESAComponent } from './monografia-em-pre-defesa/monog
 import { DetalheMonografiaPreDefesaComponent } from './detalhe-monografia-pre-defesa/detalhe-monografia-pre-defesa.component';
 import { PreDefesaModalComponent } from './pre-defesa-modal/pre-defesa-modal.component';
 import { DetalheMarcacaoDefesaComponent } from './detalhe-marcacao-defesa/detalhe-marcacao-defesa.component';
+import { DetalheDefesaComponent } from './detalhe-defesa/detalhe-defesa.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DetalheMarcacaoDefesaComponent } from './detalhe-marcacao-defesa/detalh
     MonografiaEMPREDEFESAComponent,
     DetalheMonografiaPreDefesaComponent,
     PreDefesaModalComponent,
-    DetalheMarcacaoDefesaComponent
+    DetalheMarcacaoDefesaComponent,
+    DetalheDefesaComponent
   ],
   imports: [
     CommonModule,

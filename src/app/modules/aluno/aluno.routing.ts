@@ -51,7 +51,6 @@ export const ALUNO_ROUTES: Routes = [
         path: 'pre-defesa',
         component: MonografiaEmPreDefesaComponent
       },
-
     ]
   }
 ];
